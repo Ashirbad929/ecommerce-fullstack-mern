@@ -20,7 +20,7 @@ const Login = () => {
     if (res.data.role === 'subscriber') {
       navigate('/user/history');
     } else {
-      navigate('/admin');
+      navigate('/admin/dashboard');
     }
   };
   const handleLogin = async () => {

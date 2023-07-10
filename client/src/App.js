@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { auth } from "./config-firebase/firebase";
 import { loggedInUser } from "./store/slices/usersSlice";
 import "./App.css";
-import { message } from "antd";
+import Passwordadmin from "./pages/admin/password";
 import Appbar from "./components/Appbar/Appbar";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
@@ -17,9 +17,12 @@ import History from "./pages/user/History";
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import CategoryCreate from "./pages/admin/CategoryCreate";
 function App() {
+ 
   const user = useSelector(selectuser);
   const dispatch = useDispatch();
+ 
   const [ok,setOk]=useState(false)
   useEffect(()=>{
     if(user && user.token){
@@ -63,13 +66,16 @@ function App() {
     <BrowserRouter>
       <Appbar />
       <Routes>
-        <Route path="/login" element={<Login />} />
+        
+        {!user&&<Route path="/login" element={<Login />} />}
         <Route path="/register" element={<Register />} />
         <Route path="/register/complete" element={<RegisterComplete />} />
         {user?<Route path="user/history" element={<History/>} />:(<></>)}
         {user?<Route path="user/password" element={<Password/>} />:(<></>)}
+        {user?<Route path="admin/password" element={<Passwordadmin/>} />:(<></>)}
         {user?<Route path="user/wishlist" element={<Wishlist/>} />:(<></>)}
         {user && user.role==='admin'? <Route path="/admin/dashboard" element={<AdminDashboard/>} />:(<></>)}
+        {user && user.role==='admin'? <Route path="/admin/category" element={<CategoryCreate/>} />:(<></>)}
        
         
       </Routes>

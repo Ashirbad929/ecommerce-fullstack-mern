@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Button, Input, Typography, Dropdown, Menu } from "antd";
+
+import { Link } from "react-router-dom";
 import {
   HomeOutlined,
   ShoppingCartOutlined,
   UserOutlined,
   SearchOutlined,
   SettingOutlined,
+  DashboardOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -43,6 +46,15 @@ const AppbarDesktop = () => {
       <Menu.Item key="logout" onClick={handleLogout}>
         <LogoutOutlined />
         Logout
+      </Menu.Item>
+      <Menu.Item>
+        <DashboardOutlined/>
+
+        {userId && userId.role==='subscriber'?
+      (<Link to="/user/history">Dashboard</Link>):
+      (<Link to="/admin/dashboard">Dashboard</Link>)
+
+        }
       </Menu.Item>
     </Menu>
   );
@@ -190,6 +202,7 @@ const AppbarDesktop = () => {
             trigger={["click"]}
             visible={menuVisible}
             onVisibleChange={handleMenuClick}
+            
           >
             <Button
               style={{
