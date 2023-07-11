@@ -21,6 +21,9 @@ const CategoryCreate = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
+  // 
+  const [keyword,setKeyword]=useState('');
+
   const loadcategories = () =>
     getCategories().then((c) => setCategories(c.data));
   useEffect(() => {
@@ -61,6 +64,13 @@ const CategoryCreate = () => {
         message.error("failed to create");
       });
   };
+  // step 3
+  const handleSearchChange=(e)=>{
+    e.preventDefault();
+    setKeyword(e.target.value.toLowerCase())
+  }
+  // step 4
+  const searched=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword)
 
   return (
     <div
@@ -105,9 +115,22 @@ const CategoryCreate = () => {
               Create Category
             </Button>
           </form>
-          <hr style={{ width: "100%", borderTop: "1px solid black" }} />
 
-          {categories.map((c) => (
+          {/* search filter */}
+          <Input
+          style={{marginTop:"3.5em"}}
+           type="search"
+           placeholder="search catagory.."
+           value={keyword}
+           onChange={handleSearchChange}
+          
+           
+           >
+
+          </Input>
+          <hr style={{ width: "100%", borderTop: "1px solid black" }} />
+            {/* step 5 */}
+          {categories.filter(searched(keyword)).map((c) => (
             <div
               key={c}
               style={{
