@@ -18,17 +18,26 @@ exports.read = async (req, res) => {
 };
 exports.update = async (req, res) => {
   const { name } = req.body;
+  console.log(name+"woho")
+
   try {
-    const updated = await Category.findByIdAndUpdate(
-      { slug: req.parmas.slug },
+    const updated = await Category.findOneAndUpdate(
+      { slug: req.params.slug },
       { name, slug: slugify(name) },
       { new: true }
     );
+
+    if (!updated) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
+
     res.json(updated);
   } catch (error) {
-    res.status(400).send("update failed");
+    console.error('Error updating category:', error);
+    res.status(400).json({ error: 'Failed to update category' });
   }
 };
+
 exports.remove = async (req, res) => {
   try {
     const deleted = await Category.findOneAndDelete({ slug: req.params.slug });

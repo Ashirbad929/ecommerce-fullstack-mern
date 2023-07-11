@@ -35,14 +35,14 @@ const Login = () => {
       const res = await signInWithEmailAndPassword(auth, email, password);
       const { user } = res;
       const idTokenResult = await user.getIdTokenResult();
-      const idToken = idTokenResult.token;
-      console.log('token: ' + idToken);
-      createOrUpdateUser(idToken)
+      const idtoken = idTokenResult.token;
+      console.log('token: ' + idtoken);
+      createOrUpdateUser(idtoken)
         .then((res) => {
           dispatch(
             loggedInUser({
               email: res.data.email,
-              idToken: idToken,
+              idtoken: idtoken,
               name: res.data.name,
               role: res.data.role,
               _id: res.data._id,

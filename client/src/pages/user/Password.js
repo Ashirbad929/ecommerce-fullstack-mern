@@ -41,10 +41,10 @@ const Password = () => {
   return (
     <div style={{ display: "flex", backgroundColor: "whitesmoke", height: "90vh" }}>
       <UserNav />
-      <div style={{ flex: 1, padding: "21px" }}>
+      <div style={{ flex: 1, padding: "21px", }}>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2em" }}>
           {loading ? <h2>Updating...</h2> : <h2>Change Password</h2>}
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", alignItems: "center", width:"80%"}}>
             <Input.Password
               placeholder="New Password"
               prefix={<LockOutlined />}
