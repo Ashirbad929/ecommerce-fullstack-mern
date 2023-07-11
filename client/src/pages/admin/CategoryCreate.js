@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { selectuser } from "../../store/slices/usersSlice";
 import { Typography } from "antd";
 import { Link } from "react-router-dom";
+import LocalSearch from "../../components/Search-engine/LocalSearch";
 import {
   DeleteOutlined,
   EditOutlined 
@@ -65,10 +66,7 @@ const CategoryCreate = () => {
       });
   };
   // step 3
-  const handleSearchChange=(e)=>{
-    e.preventDefault();
-    setKeyword(e.target.value.toLowerCase())
-  }
+ 
   // step 4
   const searched=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword)
 
@@ -117,17 +115,11 @@ const CategoryCreate = () => {
           </form>
 
           {/* search filter */}
-          <Input
-          style={{marginTop:"3.5em"}}
-           type="search"
-           placeholder="search catagory.."
-           value={keyword}
-           onChange={handleSearchChange}
+          <LocalSearch keyword={keyword} setKeyword={setKeyword}></LocalSearch> 
           
-           
-           >
+        
 
-          </Input>
+          
           <hr style={{ width: "100%", borderTop: "1px solid black" }} />
             {/* step 5 */}
           {categories.filter(searched(keyword)).map((c) => (
