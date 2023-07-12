@@ -19,6 +19,7 @@ import Wishlist from "./pages/user/Wishlist";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import CategoryCreate from "./pages/admin/CategoryCreate";
 import CategoryUpdate from "./pages/admin/CategoryUpdate";
+import SubCreate from "./pages/admin/sub/SubCreate";
 function App() {
  
   const user = useSelector(selectuser);
@@ -77,6 +78,7 @@ function App() {
         {user?<Route path="user/wishlist" element={<Wishlist/>} />:(<></>)}
         {user && user.role==='admin'? <Route path="/admin/dashboard" element={<AdminDashboard/>} />:(<></>)}
         {user && user.role==='admin'? <Route path="/admin/category" element={<CategoryCreate/>} />:(<></>)}
+        {user && user.role==='admin'? <Route path="/admin/sub" element={<SubCreate/>} />:(<></>)}
         {user && user.role==='admin'? <Route path="/admin/category/:slug" element={<CategoryUpdate/>} />:(<></>)}
        
         

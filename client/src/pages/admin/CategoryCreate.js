@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectuser } from "../../store/slices/usersSlice";
-import { Typography } from "antd";
+import { Typography, Button, Input, message } from "antd";
 import { Link } from "react-router-dom";
 import LocalSearch from "../../components/Search-engine/LocalSearch";
-import {
-  DeleteOutlined,
-  EditOutlined 
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import {
   createCategory,
   getCategories,
   removeCategory,
 } from "../../ApiFunctions/category";
 import AdminNav from "./AdminNav";
-import { message, Button, Input, List, Checkbox } from "antd";
 
 const CategoryCreate = () => {
   const user = useSelector(selectuser);
@@ -22,34 +18,34 @@ const CategoryCreate = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
-  // 
-  const [keyword,setKeyword]=useState('');
+  const [keyword, setKeyword] = useState("");
 
-  const loadcategories = () =>
+  const loadCategories = () => {
     getCategories().then((c) => setCategories(c.data));
-  useEffect(() => {
-    loadcategories();
-  }, []);
-  const handleRemove=async(slug)=>{
-    if(window.confirm("confirm delete?")){
-      setLoading(true)
-      removeCategory(slug,user.idtoken)
-      .then((res)=>{
-        message.success(`${res.data.name} deleted `)
-        loadcategories();
-        setLoading(false)
-      })
-      .catch((err)=>{
-       if(err.response.status===400){
-        
-        message.error(err.response.data)
-       }
-       setLoading(false)
-      })
-    }
-    
+  };
 
-  }
+  useEffect(() => {
+    loadCategories();
+  }, []);
+
+  const handleRemove = async (slug) => {
+    if (window.confirm("Confirm delete?")) {
+      setLoading(true);
+      removeCategory(slug, user.idtoken)
+        .then((res) => {
+          message.success(`${res.data.name} deleted`);
+          loadCategories();
+          setLoading(false);
+        })
+        .catch((err) => {
+         
+            message.error(err.response.data);
+          
+          setLoading(false);
+        });
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -58,25 +54,27 @@ const CategoryCreate = () => {
         setLoading(false);
         setName("");
         message.success(`"${res.data.name}" is created`);
-        loadcategories();
+        loadCategories();
       })
       .catch((err) => {
         setLoading(false);
-        message.error("failed to create");
+        message.error("Failed to create");
       });
   };
-  // step 3
- 
-  // step 4
-  const searched=(keyword)=>(c)=>c.name.toLowerCase().includes(keyword)
+
+  const searched = (keyword) => (c) =>
+    c.name.toLowerCase().includes(keyword);
 
   return (
     <div
-      style={{ display: "flex", backgroundColor: "whitesmoke", height: "90vh" }}
+    style={{
+      display: "flex",
+      height: "90vh",
+      marginTop:"0"
+    }}
     >
       <AdminNav />
-
-      <div style={{ flex: 1, padding: "20px" }}>
+      <div style={{ flex: 1 }}>
         <div
           style={{
             display: "flex",
@@ -84,6 +82,8 @@ const CategoryCreate = () => {
             alignItems: "center",
             justifyContent: "center",
             padding: "2em",
+            height: "100%",
+            overflowY: "auto",
           }}
         >
           {loading ? <h2>Creating...</h2> : <h2>Create Category</h2>}
@@ -114,51 +114,60 @@ const CategoryCreate = () => {
             </Button>
           </form>
 
-          {/* search filter */}
-          <LocalSearch keyword={keyword} setKeyword={setKeyword}></LocalSearch> 
-          
-        
+          <LocalSearch
+            keyword={keyword}
+            setKeyword={setKeyword}
+            style={{ marginTop: "2em", width: "50%" }}
+          />
 
-          
-          <hr style={{ width: "100%", borderTop: "1px solid black" }} />
-            {/* step 5 */}
-          {categories.filter(searched(keyword)).map((c) => (
-            <div
-              key={c}
-              style={{
-                width: "80%",
-                backgroundColor:"#354A21",
-                marginBottom: "10px",
-                paddingLeft: "10px",
-                marginRight: "auto",
-              }}
-            >
+          <div
+            style={{
+              width: "100%",
+              height: "35vh",
+              overflowY: "auto",
+              marginTop: "2em",
+            }}
+          >
+            {categories.filter(searched(keyword)).map((c) => (
               <div
+                key={c._id}
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  color: "white",
-                  marginLeft: "7px",
-                  padding: "5px",
+                  width: "80%",
+                  backgroundColor: "#F0F2F5",
+                  marginBottom: "30px",
+                  paddingLeft: "10px",
+                  marginRight: "auto",
                 }}
               >
-                <Typography.Text style={{ color: "whitesmoke" }}>
-                  {c.name}
-                </Typography.Text>
-                <div>
-                  <Link to={`/admin/category/${c.slug}`}>
-                    <span style={{ marginRight: "8px" }}>
-                      <EditOutlined style={{color:"white"}}/>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    color: "#333",
+                    marginLeft: "7px",
+                    padding: "5px",
+                  }}
+                >
+                  <Typography.Text
+                    style={{ color: "#333", fontWeight: "bold" }}
+                  >
+                    {c.name}
+                  </Typography.Text>
+                  <div>
+                    <Link to={`/admin/category/${c.slug}`}>
+                      <span style={{ marginRight: "8px" }}>
+                        <EditOutlined style={{ color: "#1890ff" }} />
+                      </span>
+                    </Link>
+                    <span onClick={() => handleRemove(c.slug)}>
+                      <DeleteOutlined style={{ color: "#ff4d4f" }} />
                     </span>
-                  </Link>
-                  <span onClick={()=>handleRemove(c.slug)}>
-                    <DeleteOutlined style={{color:"white"}} />
-                  </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>

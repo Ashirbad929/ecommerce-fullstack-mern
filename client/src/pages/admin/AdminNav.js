@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu } from "antd";
 import {
@@ -7,9 +7,8 @@ import {
   DollarOutlined,
   UserAddOutlined,
   AppstoreOutlined,
-  CodeSandboxOutlined ,
-  GiftOutlined
-  
+  CodeSandboxOutlined,
+  GiftOutlined,
 } from "@ant-design/icons";
 
 const AdminNav = () => {
@@ -22,30 +21,27 @@ const AdminNav = () => {
   }, [location]);
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-        
-        
+    <div style={{
+      height: "100vh",
+      display: "flex",
+      flexDirection: "column",
+      position:"",
+      justifyContent: "space-between",
+    }}>
       <Menu
         theme="dark"
         mode="vertical"
         selectedKeys={selectedKeys}
-        style={{ flexGrow: 1, border: "none" ,backgroundColor:"rgb(20,20,20)" }}
+        style={{ flexGrow: 1, border: "none", backgroundColor: "rgb(20, 20, 20)" }}
       >
         <Menu.Item
-          
-          icon={<UserAddOutlined style={{color:"red" ,fontSize:"30px",marginLeft:"1em"}} />}
+          icon={
+            <UserAddOutlined
+              style={{ color: "red", fontSize: "30px", marginLeft: "1em" }}
+            />
+          }
           style={{ flexGrow: 1 }}
-        >
-          
-        </Menu.Item>
+        ></Menu.Item>
         <Menu.Item
           key="/admin/dashboard"
           icon={<DashboardOutlined />}
@@ -69,28 +65,33 @@ const AdminNav = () => {
         </Menu.Item>
         <Menu.Item
           key="/admin/category"
-         icon={<AppstoreOutlined/>}
+          icon={<AppstoreOutlined />}
           style={{ flexGrow: 1 }}
         >
           <Link to="/admin/category">category</Link>
         </Menu.Item>
         <Menu.Item
+          key="/admin/sub"
+          icon={<AppstoreOutlined />}
+          style={{ flexGrow: 1 }}
+        >
+          <Link to="/admin/sub">Sub-category</Link>
+        </Menu.Item>
+        <Menu.Item
           key="/admin/coupon"
-          icon={<DollarOutlined style={{color:"green"}}/>}
-         
+          icon={<DollarOutlined style={{ color: "green" }} />}
           style={{ flexGrow: 1 }}
         >
           <Link to="/admin/coupon">coupon</Link>
         </Menu.Item>
         <Menu.Item
           key="/admin/password"
-         icon={<UserOutlined/>}
+          icon={<UserOutlined />}
           style={{ flexGrow: 1 }}
         >
           <Link to="/admin/password">password</Link>
         </Menu.Item>
       </Menu>
-      <div style={{ height: "20px" }}></div>
     </div>
   );
 };

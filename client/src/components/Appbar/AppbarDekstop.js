@@ -7,6 +7,7 @@ import {
   ShoppingCartOutlined,
   UserOutlined,
   SearchOutlined,
+  SolutionOutlined ,
   SettingOutlined,
   DashboardOutlined,
   LogoutOutlined,
@@ -241,7 +242,7 @@ const AppbarDesktop = () => {
               bar.style.opacity = "0";
             }}
           >
-            <ShoppingCartOutlined
+            <SolutionOutlined
               style={{ color: "#FAFAD2", fontSize: "20px" }}
             />
             <Typography.Text
