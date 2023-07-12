@@ -38,9 +38,8 @@ const CategoryCreate = () => {
           setLoading(false);
         })
         .catch((err) => {
-         
-            message.error(err.response.data);
-          
+          message.error(err.response.data);
+
           setLoading(false);
         });
     }
@@ -62,28 +61,29 @@ const CategoryCreate = () => {
       });
   };
 
-  const searched = (keyword) => (c) =>
-    c.name.toLowerCase().includes(keyword);
+  const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
     <div
-    style={{
-      display: "flex",
-      height: "90vh",
-      marginTop:"0"
-    }}
+      style={{
+        display: "flex",
+        height:"90vh"
+        
+      }}
     >
-      <AdminNav />
-      <div style={{ flex: 1 }}>
+      <AdminNav  />
+      <div style={{ flex: 2 }}>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            padding: "2em",
+            padding: "3em",
             height: "100%",
-            overflowY: "auto",
+            overflowY: "none",
+           
+            
           }}
         >
           {loading ? <h2>Creating...</h2> : <h2>Create Category</h2>}
@@ -123,8 +123,10 @@ const CategoryCreate = () => {
           <div
             style={{
               width: "100%",
-              height: "35vh",
+              height: "100% ",
               overflowY: "auto",
+              padding:"1em",
+              border:"3px solid grey",
               marginTop: "2em",
             }}
           >
@@ -132,11 +134,10 @@ const CategoryCreate = () => {
               <div
                 key={c._id}
                 style={{
-                  width: "80%",
+                  width: "100%",
                   backgroundColor: "#F0F2F5",
                   marginBottom: "30px",
-                  paddingLeft: "10px",
-                  marginRight: "auto",
+                 
                 }}
               >
                 <div

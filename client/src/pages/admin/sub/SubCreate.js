@@ -5,7 +5,7 @@ import { Typography, Button, Input, message, Select } from "antd";
 import { Link } from "react-router-dom";
 import LocalSearch from "../../../components/Search-engine/LocalSearch";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { createSub, getSub, removeSub } from "../../../ApiFunctions/sub";
+import { createSub, getSub, removeSub ,getSubs} from "../../../ApiFunctions/sub";
 import AdminNav from "../AdminNav";
 import { getCategories } from "../../../ApiFunctions/category";
 
@@ -19,13 +19,18 @@ const SubCreate = () => {
   const [categories, setCategories] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [category,setCategory]=useState("")
+  const [subs,setSubs]=useState([])
 
   const loadCategories = () => {
     getCategories().then((c) => setCategories(c.data));
   };
+  const  loadSubs= () => {
+    getSubs().then((s) => setSubs(s.data));
+  };
 
   useEffect(() => {
     loadCategories();
+    loadSubs();
   }, []);
 
   const handleRemove = async (slug) => {
@@ -34,8 +39,8 @@ const SubCreate = () => {
       removeSub(slug, user.idtoken)
         .then((res) => {
           message.success(`${res.data.name} deleted`);
-          loadCategories();
-          setLoading(false);
+          setLoading(false)
+         loadSubs();
         })
         .catch((err) => {
           if (err.response.status === 400) {
@@ -54,6 +59,7 @@ const SubCreate = () => {
         setLoading(false);
         setName("");
         message.success(`"${res.data.name}" is sub created`);
+        loadSubs();
       })
       .catch((err) => {
         setLoading(false);
@@ -68,8 +74,8 @@ const SubCreate = () => {
     <div
       style={{
         display: "flex",
-        backgroundColor: "whitesmoke",
-        height: "90vh",
+      height: "90vh",
+      
       }}
     >
       <AdminNav />
@@ -81,13 +87,15 @@ const SubCreate = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            padding: "2em",
+            padding: "1em",
+            height: "100%",
+            overflowY: "auto",
           }}
         >
           {loading ? <h2>Creating...</h2> : <h2>Create sub Category</h2>}
           
 
-          <div style={{ marginTop: "2em", width: "50%",marginBottom:"4em" }}>
+          <div style={{ marginTop: ".5em", width: "40%",marginBottom:"2em" }}>
             <Typography.Text strong>Category</Typography.Text>
             <Select
               style={{ width: "100%", backgroundColor: "#354A21" }}
@@ -136,15 +144,26 @@ const SubCreate = () => {
 
                 
           <hr style={{ width: "100%", borderTop: "1px solid black" }} />
-
-          {/* {categories.filter(searched(keyword)).map((c) => (
+            <div   style={{
+             borderStyle:"double",
+            
+              width:"80%",
+              marginRight:"auto",
+              height: "100%",
+              overflowY: "auto",
+              marginTop: "1em",
+              marginBottom:"0em"
+            }} >
+            {subs.filter(searched(keyword)).map((s) => (
             <div
-              key={c._id}
+              key={s._id}
               style={{
-                width: "80%",
+                
+                width: "100%",
                 backgroundColor: "#F0F2F5",
                 marginBottom: "10px",
-                padding: "10px",
+                padding:"0"
+              
               }}
             >
               <div
@@ -157,20 +176,22 @@ const SubCreate = () => {
                   padding: "5px",
                 }}
               >
-                <Typography.Text strong>{c.name}</Typography.Text>
+                <Typography.Text strong>{s.name}</Typography.Text>
                 <div>
-                  <Link to={`/admin/category/${c.slug}`}>
+                  <Link to={`/admin/category/${s.slug}`}>
                     <span style={{ marginRight: "8px" }}>
                       <EditOutlined style={{ color: "#1890ff" }} />
                     </span>
                   </Link>
-                  <span onClick={() => handleRemove(c.slug)}>
+                  <span onClick={() => handleRemove(s.slug)}>
                     <DeleteOutlined style={{ color: "#ff4d4f" }} />
                   </span>
                 </div>
               </div>
             </div>
-          ))} */}
+          ))}
+            </div>
+          
         </div>
       </div>
     </div>
