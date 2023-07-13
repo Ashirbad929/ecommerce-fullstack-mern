@@ -80,7 +80,7 @@ const SubCreate = () => {
     >
       <AdminNav />
 
-      <div style={{ flex: 1, padding: "20px" }}>
+      <div style={{ flex: 1, padding: "20px",marginBottom:"auto" }}>
         <div
           style={{
             display: "flex",
@@ -178,7 +178,7 @@ const SubCreate = () => {
               >
                 <Typography.Text strong>{s.name}</Typography.Text>
                 <div>
-                  <Link to={`/admin/category/${s.slug}`}>
+                  <Link to={`/admin/sub/${s.slug}`}>
                     <span style={{ marginRight: "8px" }}>
                       <EditOutlined style={{ color: "#1890ff" }} />
                     </span>

@@ -10,7 +10,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import RegisterComplete from "./components/auth/RegisterComplete";
 import { currentAdmin, currentUser } from "./ApiFunctions/auth";
-
+import ProductCreate from "./pages/product/ProductCreate";
 import { selectuser } from "./store/slices/usersSlice";
 import { useSelector } from "react-redux";
 import History from "./pages/user/History";
@@ -20,6 +20,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import CategoryCreate from "./pages/admin/CategoryCreate";
 import CategoryUpdate from "./pages/admin/CategoryUpdate";
 import SubCreate from "./pages/admin/sub/SubCreate";
+import SubUpdate from "./pages/admin/sub/SubUpdate";
 function App() {
  
   const user = useSelector(selectuser);
@@ -79,7 +80,9 @@ function App() {
         {user && user.role==='admin'? <Route path="/admin/dashboard" element={<AdminDashboard/>} />:(<></>)}
         {user && user.role==='admin'? <Route path="/admin/category" element={<CategoryCreate/>} />:(<></>)}
         {user && user.role==='admin'? <Route path="/admin/sub" element={<SubCreate/>} />:(<></>)}
+        {user && user.role==='admin'? <Route path="/admin/sub/:slug" element={<SubUpdate/>} />:(<></>)}
         {user && user.role==='admin'? <Route path="/admin/category/:slug" element={<CategoryUpdate/>} />:(<></>)}
+        {user && user.role==='admin'? <Route path="/admin/product/" element={<ProductCreate/>} />:(<></>)}
        
         
       </Routes>

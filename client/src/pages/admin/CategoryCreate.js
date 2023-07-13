@@ -126,7 +126,7 @@ const CategoryCreate = () => {
               height: "100% ",
               overflowY: "auto",
               padding:"1em",
-              border:"3px solid grey",
+              border:"none",
               marginTop: "2em",
             }}
           >
