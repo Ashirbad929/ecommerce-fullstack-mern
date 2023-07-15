@@ -4,10 +4,12 @@ const router = express.Router();
 const { authCheck, adminCheck } = require("../middleware/auth");
 // controllers
 const {
-  create
+  create,
+  read
   
 } = require("../controllers/product.js"); //make sure to destructure to get the callback function
 router.post("/product", authCheck, adminCheck, create);
+router.get("/products", read);//show products this will be public
 
 
 module.exports = router;

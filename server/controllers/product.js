@@ -8,7 +8,13 @@ exports.create=async(req,res)=>{
         res.json(newProduct)
     } catch (error) {
         console.log(error)
-        res.status(400).send('create product failed')
+        res.status(500).json({ error: error.message }); //send error with status code
         
     }
+}
+//public route no middleware getting all the products
+exports.read=async(req,res)=>{
+    let products=await Product.find({});
+    res.json(products);
+
 }

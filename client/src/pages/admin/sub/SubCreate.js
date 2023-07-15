@@ -5,27 +5,27 @@ import { Typography, Button, Input, message, Select } from "antd";
 import { Link } from "react-router-dom";
 import LocalSearch from "../../../components/Search-engine/LocalSearch";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { createSub, getSub, removeSub ,getSubs} from "../../../ApiFunctions/sub";
+import { createSub, getSub, removeSub, getSubs } from "../../../ApiFunctions/sub";
 import AdminNav from "../AdminNav";
 import { getCategories } from "../../../ApiFunctions/category";
 
-
+const { Option } = Select;
 
 const SubCreate = () => {
-  const { Option } = Select;
   const user = useSelector(selectuser);
 
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const [keyword, setKeyword] = useState("");
-  const [category,setCategory]=useState("")
-  const [subs,setSubs]=useState([])
+  const [category, setCategory] = useState("");
+  const [subs, setSubs] = useState([]);
 
   const loadCategories = () => {
     getCategories().then((c) => setCategories(c.data));
   };
-  const  loadSubs= () => {
+
+  const loadSubs = () => {
     getSubs().then((s) => setSubs(s.data));
   };
 
@@ -40,8 +40,8 @@ const SubCreate = () => {
       removeSub(slug, user.idtoken)
         .then((res) => {
           message.success(`${res.data.name} deleted`);
-          setLoading(false)
-         loadSubs();
+          setLoading(false);
+          loadSubs();
         })
         .catch((err) => {
           if (err.response.status === 400) {
@@ -55,33 +55,26 @@ const SubCreate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    createSub({ name ,parent:category}, user.idtoken)
+    createSub({ name, parent: category }, user.idtoken)
       .then((res) => {
         setLoading(false);
         setName("");
-        message.success(`"${res.data.name}" is sub created`);
+        message.success(`"${res.data.name}" sub-category created`);
         loadSubs();
       })
       .catch((err) => {
         setLoading(false);
-        message.error("Failed to create");
-        
+        message.error("Failed to create sub-category");
       });
   };
 
   const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
-    <div
-      style={{
-        display: "flex",
-      height: "90vh",
-      
-      }}
-    >
+    <div style={{ display: "flex", height: "100%" }}>
       <AdminNav />
 
-      <div style={{ flex: 1, padding: "20px",marginBottom:"auto" }}>
+      <div style={{ flex: 1, padding: "20px", overflowY: "auto" }}>
         <div
           style={{
             display: "flex",
@@ -90,29 +83,35 @@ const SubCreate = () => {
             justifyContent: "center",
             padding: "1em",
             height: "100%",
-            overflowY: "auto",
           }}
         >
-          {loading ? <h2>Creating...</h2> : <h2>Create sub Category</h2>}
-          
+          {loading ? (
+            <h2>Creating...</h2>
+          ) : (
+            <h2 style={{ marginBottom: "1em" }}>Create Sub Category</h2>
+          )}
 
-          <div style={{ marginTop: ".5em", width: "40%",marginBottom:"2em" }}>
+          <div
+            style={{
+              marginTop: "0.5em",
+              width: "40%",
+              marginBottom: "2em",
+            }}
+          >
             <Typography.Text strong>Category</Typography.Text>
             <Select
               style={{ width: "100%", backgroundColor: "#354A21" }}
               placeholder="Select parent category"
-              onChange={(e) =>setCategory(e)}
-              
-             
+              onChange={(value) => setCategory(value)}
             >
               {categories.map((c) => (
-                <Option key={c._id} value={c._id} >
-                   
+                <Option key={c._id} value={c._id}>
                   {c.name}
                 </Option>
               ))}
             </Select>
           </div>
+
           <form
             onSubmit={handleSubmit}
             style={{
@@ -139,41 +138,27 @@ const SubCreate = () => {
               Create Sub Category
             </Button>
           </form>
-         
-                
+
           <LocalSearch keyword={keyword} setKeyword={setKeyword} />
 
-                
           <hr style={{ width: "100%", borderTop: "1px solid black" }} />
-            <div   style={{
-             borderStyle:"double",
-            
-              width:"80%",
-              marginRight:"auto",
-              height: "100%",
-              overflowY: "auto",
+
+          <div
+            style={{
+              width: "100%",
+              backgroundColor: "#F0F2F5",
+              padding: "10px",
               marginTop: "1em",
-              marginBottom:"0em"
-            }} >
+            }}
+          >
             {subs.filter(searched(keyword)).map((s) => (
-            <div
-              key={s._id}
-              style={{
-                
-                width: "100%",
-                backgroundColor: "#F0F2F5",
-                marginBottom: "10px",
-                padding:"0"
-              
-              }}
-            >
               <div
+                key={s._id}
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
                   color: "#333",
-                  marginLeft: "7px",
                   padding: "5px",
                 }}
               >
@@ -189,10 +174,8 @@ const SubCreate = () => {
                   </span>
                 </div>
               </div>
-            </div>
-          ))}
-            </div>
-          
+            ))}
+          </div>
         </div>
       </div>
     </div>

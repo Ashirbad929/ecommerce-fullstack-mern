@@ -1,5 +1,9 @@
 const Category = require("../models/category");
+const Sub = require("../models/sub");
+
+
 const slugify = require("slugify");
+
 exports.create = async (req, res) => {
   try {
     const { name } = req.body;
@@ -44,5 +48,15 @@ exports.remove = async (req, res) => {
     res.json(deleted);
   } catch (error) {
     res.status(400).send("deletion falied");
+  }
+};
+exports.getSubs = async (req, res) => {
+  try {
+    const parentId = req.params._id; // Assuming you're passing the parent category ID as "_id" in the request params
+
+    const subs = await Sub.find({ parent: parentId }); // Find subcategories where the parent field matches the given parent ID
+    res.json(subs);
+  } catch (error) {
+    res.status(400).send("Failed to fetch subcategories");
   }
 };

@@ -5,11 +5,7 @@ import { Typography, Button, Input, message } from "antd";
 import { Link } from "react-router-dom";
 import LocalSearch from "../../components/Search-engine/LocalSearch";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import {
-  createCategory,
-  getCategories,
-  removeCategory,
-} from "../../ApiFunctions/category";
+import { createCategory, getCategories, removeCategory } from "../../ApiFunctions/category";
 import AdminNav from "./AdminNav";
 
 const CategoryCreate = () => {
@@ -20,58 +16,49 @@ const CategoryCreate = () => {
   const [categories, setCategories] = useState([]);
   const [keyword, setKeyword] = useState("");
 
-  const loadCategories = () => {
-    getCategories().then((c) => setCategories(c.data));
-  };
-
   useEffect(() => {
     loadCategories();
   }, []);
 
+  const loadCategories = () => {
+    getCategories().then((c) => setCategories(c.data));
+  };
+
   const handleRemove = async (slug) => {
     if (window.confirm("Confirm delete?")) {
       setLoading(true);
-      removeCategory(slug, user.idtoken)
-        .then((res) => {
-          message.success(`${res.data.name} deleted`);
-          loadCategories();
-          setLoading(false);
-        })
-        .catch((err) => {
-          message.error(err.response.data);
-
-          setLoading(false);
-        });
+      try {
+        const res = await removeCategory(slug, user.idtoken);
+        message.success(`${res.data.name} deleted`);
+        loadCategories();
+      } catch (err) {
+        message.error(err.response.data);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    createCategory({ name }, user.idtoken)
-      .then((res) => {
-        setLoading(false);
-        setName("");
-        message.success(`"${res.data.name}" is created`);
-        loadCategories();
-      })
-      .catch((err) => {
-        setLoading(false);
-        message.error("Failed to create");
-      });
+    try {
+      const res = await createCategory({ name }, user.idtoken);
+      message.success(`"${res.data.name}" is created`);
+      setName("");
+      loadCategories();
+    } catch (err) {
+      message.error("Failed to create");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        height:"90vh"
-        
-      }}
-    >
-      <AdminNav  />
+    <div style={{ display: "flex", height: "90vh" }}>
+      <AdminNav />
       <div style={{ flex: 2 }}>
         <div
           style={{
@@ -82,11 +69,9 @@ const CategoryCreate = () => {
             padding: "3em",
             height: "100%",
             overflowY: "none",
-           
-            
           }}
         >
-          {loading ? <h2>Creating...</h2> : <h2>Create Category</h2>}
+          <h2>{loading ? "Creating..." : "Create Category"}</h2>
           <form
             onSubmit={handleSubmit}
             style={{
@@ -102,7 +87,6 @@ const CategoryCreate = () => {
               onChange={(e) => setName(e.target.value)}
               style={{ marginBottom: "1em" }}
             />
-
             <Button
               type="primary"
               htmlType="submit"
@@ -113,20 +97,18 @@ const CategoryCreate = () => {
               Create Category
             </Button>
           </form>
-
           <LocalSearch
             keyword={keyword}
             setKeyword={setKeyword}
             style={{ marginTop: "2em", width: "50%" }}
           />
-
           <div
             style={{
               width: "100%",
               height: "100% ",
               overflowY: "auto",
-              padding:"1em",
-              border:"none",
+              padding: "1em",
+              border: "none",
               marginTop: "2em",
             }}
           >
@@ -137,7 +119,6 @@ const CategoryCreate = () => {
                   width: "100%",
                   backgroundColor: "#F0F2F5",
                   marginBottom: "30px",
-                 
                 }}
               >
                 <div
