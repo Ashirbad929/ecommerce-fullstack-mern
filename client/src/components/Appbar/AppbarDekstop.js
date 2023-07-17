@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { Button, Input, Typography, Dropdown, Menu } from "antd";
-
 import { Link } from "react-router-dom";
 import {
   HomeOutlined,
   ShoppingCartOutlined,
   UserOutlined,
   SearchOutlined,
-  SolutionOutlined ,
+  SolutionOutlined,
   SettingOutlined,
   DashboardOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import ecommlogo from "../../images/ecommlogo.jpg";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { loggOutUser } from "../../store/slices/usersSlice";
@@ -49,13 +49,12 @@ const AppbarDesktop = () => {
         Logout
       </Menu.Item>
       <Menu.Item>
-        <DashboardOutlined/>
-
-        {userId && userId.role==='subscriber'?
-      (<Link to="/user/history">Dashboard</Link>):
-      (<Link to="/admin/dashboard">Dashboard</Link>)
-
-        }
+        <DashboardOutlined />
+        {userId && userId.role === "subscriber" ? (
+          <Link to="/user/history">Dashboard</Link>
+        ) : (
+          <Link to="/admin/dashboard">Dashboard</Link>
+        )}
       </Menu.Item>
     </Menu>
   );
@@ -67,13 +66,16 @@ const AppbarDesktop = () => {
         flexDirection: "row",
         gap: "2em",
         alignItems: "center",
-        backgroundColor: "#080808",
+        backgroundColor: "#F0F2F5", // Change the background color to a slightly darker shade
         border: "none",
         padding: "1em",
+        color: "#333333", // Change the text color
+        border: "1.5px solid black",
+        maxHeight: "100vh",
       }}
     >
       <Button
-        onClick={()=>navigate("/shop")}
+        onClick={() => navigate("/shop")}
         style={{
           display: "flex",
           gap: "0.5em",
@@ -85,19 +87,18 @@ const AppbarDesktop = () => {
         <Typography.Title
           level={3}
           style={{
-            fontSize: "30px",
-            color: "#FAFAD2",
+            color: "#0492C2", // Change the title color
             textTransform: "none",
-            fontFamily: "'Water Brush',cursive",
+            fontFamily: "monospace",
             margin: 0,
           }}
         >
-          Shopify
+          Fetch
         </Typography.Title>
       </Button>
 
       <Button
-        onClick={()=>navigate("/home")}
+        onClick={() => navigate("/home")}
         style={{
           display: "flex",
           gap: "0.5em",
@@ -117,10 +118,10 @@ const AppbarDesktop = () => {
           bar.style.opacity = "0";
         }}
       >
-        <HomeOutlined style={{ fontSize: "20px", color: "#FAFAD2" }} />
+        <HomeOutlined style={{ fontSize: "20px", color: "#1890ff" }} />
         <Typography.Text
           style={{
-            color: "white",
+            color: "#333333",
             textTransform: "none",
             fontFamily: "Rosemary",
             fontSize: "15px",
@@ -137,7 +138,7 @@ const AppbarDesktop = () => {
             right: "0",
             width: "100%",
             height: "3px",
-            backgroundColor: "#FAFAD2",
+            backgroundColor: "#1890ff",
             opacity: "0",
             transition: "opacity 0.3s",
           }}
@@ -145,7 +146,7 @@ const AppbarDesktop = () => {
       </Button>
 
       <Button
-        onClick={()=>navigate('/cart')}
+        onClick={() => navigate("/cart")}
         style={{
           display: "flex",
           gap: "0.5em",
@@ -165,10 +166,12 @@ const AppbarDesktop = () => {
           bar.style.opacity = "0";
         }}
       >
-        <ShoppingCartOutlined style={{ color: "#FAFAD2", fontSize: "20px" }} />
+        <ShoppingCartOutlined
+          style={{ color: "#1890ff", fontSize: "20px" }}
+        />
         <Typography.Text
           style={{
-            color: "white",
+            color: "#333333",
             fontFamily: "Rosemary",
             textTransform: "none",
           }}
@@ -184,7 +187,7 @@ const AppbarDesktop = () => {
             right: "0",
             width: "100%",
             height: "3px",
-            backgroundColor: "#FAFAD2",
+            backgroundColor: "#1890ff",
             opacity: "0",
             transition: "opacity 0.3s",
           }}
@@ -194,8 +197,10 @@ const AppbarDesktop = () => {
       <div style={{ flex: 1 }} />
 
       {userId ? (
-        <div style={{ color: "white", display: "flex", alignItems: "center" }}>
-          <Typography.Text style={{ color: "white", textTransform: "none" }}>
+        <div style={{ color: "#333333", display: "flex", alignItems: "center" }}>
+          <Typography.Text
+            style={{ color: "#333333", textTransform: "none" }}
+          >
             {userId.email.split("@")[0]}
           </Typography.Text>
           <Dropdown
@@ -203,26 +208,25 @@ const AppbarDesktop = () => {
             trigger={["click"]}
             visible={menuVisible}
             onVisibleChange={handleMenuClick}
-            
           >
             <Button
               style={{
                 display: "flex",
                 gap: "0.5em",
                 alignItems: "center",
-                color: "white",
+                color: "#333333",
                 backgroundColor: "transparent",
                 border: "none",
               }}
             >
-              <SettingOutlined style={{ color: "white" }} />
+              <SettingOutlined style={{ color: "#333333" }} />
             </Button>
           </Dropdown>
         </div>
       ) : (
         <div style={{ display: "flex", gap: "0.5em", alignItems: "center" }}>
           <Button
-            onClick={()=>navigate("/register")}
+            onClick={() => navigate("/register")}
             style={{
               display: "flex",
               gap: "0.5em",
@@ -243,11 +247,11 @@ const AppbarDesktop = () => {
             }}
           >
             <SolutionOutlined
-              style={{ color: "#FAFAD2", fontSize: "20px" }}
+              style={{ color: "#1890ff", fontSize: "20px" }}
             />
             <Typography.Text
               style={{
-                color: "white",
+                color: "#333333",
                 fontFamily: "Rosemary",
                 textTransform: "none",
               }}
@@ -263,7 +267,7 @@ const AppbarDesktop = () => {
                 right: "0",
                 width: "100%",
                 height: "3px",
-                backgroundColor: "#FAFAD2",
+                backgroundColor: "#1890ff",
                 opacity: "0",
                 transition: "opacity 0.3s",
               }}
@@ -271,7 +275,7 @@ const AppbarDesktop = () => {
           </Button>
 
           <Button
-            onClick={()=>navigate("/login")}
+            onClick={() => navigate("/login")}
             style={{
               display: "flex",
               gap: "0.5em",
@@ -291,10 +295,10 @@ const AppbarDesktop = () => {
               bar.style.opacity = "0";
             }}
           >
-            <UserOutlined style={{ fontSize: "20px", color: "#FAFAD2" }} />
+            <UserOutlined style={{ fontSize: "20px", color: "#1890ff" }} />
             <Typography.Text
               style={{
-                color: "white",
+                color: "#333333",
                 fontFamily: "Rosemary",
                 textTransform: "none",
               }}
@@ -310,7 +314,7 @@ const AppbarDesktop = () => {
                 right: "0",
                 width: "100%",
                 height: "3px",
-                backgroundColor: "#FAFAD2",
+                backgroundColor: "#1890ff",
                 opacity: "0",
                 transition: "opacity 0.3s",
               }}

@@ -5,11 +5,11 @@ const { authCheck, adminCheck } = require("../middleware/auth");
 // controllers
 const {
   create,
-  read
+  listAll
   
 } = require("../controllers/product.js"); //make sure to destructure to get the callback function
 router.post("/product", authCheck, adminCheck, create);
-router.get("/products", read);//show products this will be public
+router.get("/products/:count", listAll);//show products this will be public
 
 
 module.exports = router;

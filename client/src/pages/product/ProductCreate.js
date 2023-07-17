@@ -6,12 +6,13 @@ import { selectuser } from "../../store/slices/usersSlice";
 import { getCategories } from "../../ApiFunctions/category";
 import { useSelector } from "react-redux";
 import { getCategorySubs } from "../../ApiFunctions/category";
+import FileUpload from "../../components/forms/FileUpload";
 
 const { Option } = Select;
 
 const ProductCreate = () => {
   const user = useSelector(selectuser); // Redux
-
+  const [loading,setLoading]=useState(false)
   const loadCategories = () => {
     getCategories().then((c) => setValues({ ...values, categories: c.data }));
   };
@@ -51,7 +52,7 @@ const ProductCreate = () => {
   };
 
   const handleCategoryChange = (_id) => {
-    setValues((prevState) => ({ ...prevState, category: _id }));
+    setValues((prevState) => ({ ...prevState, category: _id, subs: [] })); //making subs  again =[] to deselect the multiselect options when user switches to different category
     getCategorySubs(_id)
       .then((res) => {
         setSubOptions(res.data);
@@ -63,7 +64,7 @@ const ProductCreate = () => {
   };
 
   const [values, setValues] = useState(initialState);
-  const { title, description, price, quantity, colors, brands, categories, subs } =
+  const { title, description, price, quantity, colors, brands,images, categories, subs } =
     values;
 
   const handleChange = (e) => {
@@ -75,12 +76,17 @@ const ProductCreate = () => {
     setValues((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  const handleFileUpload = (files) => {
+    setValues((prevState) => ({ ...prevState, images: files }));
+  };
+
   return (
     <div style={{ display: "flex", height: "90vh", overflowY: "auto" }}>
       <div style={{ position: "sticky", top: 0, zIndex: 1 }}>
         <AdminNav />
       </div>
       <div style={{ flex: 1, padding: "2rem" }}>
+        {JSON.stringify(values.images)}
         <h2 style={{ marginBottom: "2rem" }}>Create Product</h2>
         <form onSubmit={handleSubmit}>
           <div>
@@ -223,12 +229,17 @@ const ProductCreate = () => {
               </Select>
             </div>
           )}
+          {/* image upload */}
+          <div>
+            <label htmlFor="images">Images:</label>
+            <FileUpload setLoading={setLoading} onFileUpload={handleFileUpload} setValues={setValues} values={values} />
+          </div>
 
           <div style={{ position: "sticky", bottom: 0, zIndex: 1 }}>
             <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
               Save
             </Button>
-            {subs}
+            {/* {subs} */}
           </div>
         </form>
       </div>

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 // middlewares
-const { authCheck, adminCheck } = require("../middleware/auth");
+const { authCheck, adminCheck } = require("../middleware/auth.js");
 // controllers
 const {
   create,

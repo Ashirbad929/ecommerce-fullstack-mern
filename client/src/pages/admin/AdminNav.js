@@ -32,12 +32,12 @@ const AdminNav = () => {
         theme="dark"
         mode="vertical"
         selectedKeys={selectedKeys}
-        style={{ flexGrow: 1, border: "none", backgroundColor: "rgb(20, 20, 20)" }}
+        style={{ flexGrow: 1, border: "none", backgroundColor:"#000000" }} // Update the background color
       >
         <Menu.Item
           icon={
             <UserAddOutlined
-              style={{ color: "red", fontSize: "30px", marginLeft: "1em" }}
+              style={{ color: "#1890ff", fontSize: "30px", marginLeft: "1em" }} // Update the icon color
             />
           }
           style={{ flexGrow: 1 }}
@@ -79,7 +79,7 @@ const AdminNav = () => {
         </Menu.Item>
         <Menu.Item
           key="/admin/coupon"
-          icon={<DollarOutlined style={{ color: "green" }} />}
+          icon={<DollarOutlined style={{ color: "#52c41a" }} />} // Update the icon color
           style={{ flexGrow: 1 }}
         >
           <Link to="/admin/coupon">coupon</Link>
