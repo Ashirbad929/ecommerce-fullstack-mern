@@ -7,18 +7,39 @@ import { getCategories } from "../../ApiFunctions/category";
 import { useSelector } from "react-redux";
 import { getCategorySubs } from "../../ApiFunctions/category";
 import FileUpload from "../../components/forms/FileUpload";
-
+import { getProduct } from "../../ApiFunctions/product";
+import { updateProduct } from "../../ApiFunctions/product";
+import { useParams } from "react-router-dom";
 const { Option } = Select;
 
-const ProductCreate = () => {
+const ProductUpdate = () => {
+  const { slug } = useParams();
   const user = useSelector(selectuser); // Redux
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
   const loadCategories = () => {
     getCategories().then((c) => setValues({ ...values, categories: c.data }));
+  };
+  const [arrayofSubs,setarrayofSubs]=useState([]) //to prepolulate subs with previous subs 
+
+  const loadProduct = () => {
+    getProduct(slug)
+      .then((p) => {
+        setValues((Values) => ({ ...Values, ...p.data }));
+        let arr=[]
+        p.data.subs.map((s)=>{
+          arr.push(s.name) //we just need name there
+        })
+        setarrayofSubs(arr)
+        
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   useEffect(() => {
     loadCategories();
+    loadProduct();
   }, []);
 
   const initialState = {
@@ -40,16 +61,8 @@ const ProductCreate = () => {
   const [subOptions, setSubOptions] = useState([]);
   const [showSub, setShowSub] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createProduct(values, user.idtoken)
-      .then((res) => {
-        message.success("Product created", 10);
-      })
-      .catch((err) => {
-        message.error(`Failed: ${err.response.data.error}`);
-      });
-  };
+
+
 
   const handleCategoryChange = (_id) => {
     setValues((prevState) => ({ ...prevState, category: _id, subs: [] })); //making subs  again =[] to deselect the multiselect options when user switches to different category
@@ -64,9 +77,22 @@ const ProductCreate = () => {
   };
 
   const [values, setValues] = useState(initialState);
-  const { title, description, price, quantity, colors, brands,images, categories, subs } =
-    values;
-
+  const { title, description, price,category, quantity, colors, brands, images, categories, subs } = values;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true)
+    updateProduct(slug,values ,user.idtoken)
+      .then((res) => {
+        message.success("Product updated");
+        setLoading(false)
+      })
+      .catch((err) => {
+        setLoading(false)
+        message.error(`Failed ${err.response.data.err}`);
+        
+      });
+  };
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
@@ -79,15 +105,17 @@ const ProductCreate = () => {
   const handleFileUpload = (files) => {
     setValues((prevState) => ({ ...prevState, images: files }));
   };
-
+  console.log('subs',subs)
+  
   return (
     <div style={{ display: "flex", height: "90vh", overflowY: "auto" }}>
       <div style={{ position: "sticky", top: 0, zIndex: 1 }}>
         <AdminNav />
       </div>
+      {JSON.stringify(values.shipping)}
       <div style={{ flex: 1, padding: "2rem" }}>
-        {/* {JSON.stringify(values.images)} */}
-        <h2 style={{ marginBottom: "2rem" }}>Create Product</h2>
+        {loading ?(<h2 style={{ marginBottom: "2rem" }}>loading...</h2>):(<h2 style={{ marginBottom: "2rem" }}>Product Update</h2>) }
+        
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="title">Title:</label>
@@ -196,13 +224,15 @@ const ProductCreate = () => {
               style={{ marginBottom: "1.5rem", width: "100%" }}
               placeholder="Select category"
               id="category"
-              value={values.category}
+              value={values.category.name}
               onChange={(_id) => handleCategoryChange(_id)}
               dropdownStyle={{ color: "#000000" }}
-            >
+            > 
+            
               {categories.map((c) => (
                 <Option key={c._id} value={c._id}>
                   {c.name}
+                  
                 </Option>
               ))}
             </Select>
@@ -215,7 +245,9 @@ const ProductCreate = () => {
                 placeholder="Select sub-category"
                 mode="multiple" // Add mode="multiple" to enable multi-select
                 id="subcategory"
-                value={values.subs} // Update from values.subcategory to values.subs
+                defaultValue={arrayofSubs}
+                 // Update from values.subcategory to values.subs
+                 value={subs}
                 onChange={(selectedSubs) =>
                   setValues({ ...values, subs: selectedSubs }) // Use spread operator to update the subs array
                 }
@@ -223,8 +255,10 @@ const ProductCreate = () => {
               >
                 {subOptions.map((sub) => (
                   <Option key={sub._id} value={sub._id}>
-                    {sub.name}
+                    {sub.name} 
+                    
                   </Option>
+                  
                 ))}
               </Select>
             </div>
@@ -237,14 +271,15 @@ const ProductCreate = () => {
 
           <div style={{ position: "sticky", bottom: 0, zIndex: 1 }}>
             <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
-              Save
+              update & save
             </Button>
             {/* {subs} */}
           </div>
+
         </form>
       </div>
     </div>
   );
 };
 
-export default ProductCreate;
+export default ProductUpdate;

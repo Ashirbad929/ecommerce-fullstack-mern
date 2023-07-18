@@ -21,6 +21,9 @@ import CategoryCreate from "./pages/admin/CategoryCreate";
 import CategoryUpdate from "./pages/admin/CategoryUpdate";
 import SubCreate from "./pages/admin/sub/SubCreate";
 import SubUpdate from "./pages/admin/sub/SubUpdate";
+import AllProducts from "./pages/product/Allproducts";
+import ProductUpdate from "./pages/product/ProductUpdate";
+import Home from "./pages/Home";
 function App() {
  
   const user = useSelector(selectuser);
@@ -64,29 +67,35 @@ function App() {
     // cleanup
     return () => unsubscribe();
   }, []);
-
+console.log('App')
   return (
     <div>
        <BrowserRouter>
       <Appbar />
       <Routes>
+        {/* protected user routes */}
         
         {!user&&<Route path="/login" element={<Login />} />}
         <Route path="/register" element={<Register />} />
-        <Route path="/register/complete" element={<RegisterComplete />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/home" element={<Home />} />
         {user?<Route path="user/history" element={<History/>} />:(<></>)}
         {user?<Route path="user/password" element={<Password/>} />:(<></>)}
-        {user?<Route path="admin/password" element={<Passwordadmin/>} />:(<></>)}
+       
         {user?<Route path="user/wishlist" element={<Wishlist/>} />:(<></>)}
+        {/* protected admin routes */}
         {user && user.role==='admin'? <Route path="/admin/dashboard" element={<AdminDashboard/>} />:(<></>)}
         {user && user.role==='admin'? <Route path="/admin/category" element={<CategoryCreate/>} />:(<></>)}
         {user && user.role==='admin'? <Route path="/admin/sub" element={<SubCreate/>} />:(<></>)}
         {user && user.role==='admin'? <Route path="/admin/sub/:slug" element={<SubUpdate/>} />:(<></>)}
         {user && user.role==='admin'? <Route path="/admin/category/:slug" element={<CategoryUpdate/>} />:(<></>)}
-        {user && user.role==='admin'? <Route path="/admin/product/" element={<ProductCreate/>} />:(<></>)}
-       
+        {user && user.role==='admin'? <Route path="/admin/product" element={<ProductCreate/>} />:(<></>)}
+        {user && user.role==='admin'? <Route path="/admin/products" element={<AllProducts/>} />:(<></>)}
+        {user && user.role=='admin'?<Route path="admin/password" element={<Passwordadmin/>} />:(<></>)}
+        {user && user.role=='admin'?<Route path="admin/product/:slug" element={<ProductUpdate/>} />:(<></>)}
         
       </Routes>
+      
     </BrowserRouter>
     </div>
    

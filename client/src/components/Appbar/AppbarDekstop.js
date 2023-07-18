@@ -38,6 +38,7 @@ const AppbarDesktop = () => {
     dispatch(loggOutUser(null));
     navigate("/login");
   };
+
   const handleLinkClick = (path) => {
     navigate(path);
   };
@@ -66,10 +67,9 @@ const AppbarDesktop = () => {
         flexDirection: "row",
         gap: "2em",
         alignItems: "center",
-        backgroundColor: "#F0F2F5", // Change the background color to a slightly darker shade
-        border: "none",
+        backgroundColor: "#F0F2F5",
         padding: "1em",
-        color: "#333333", // Change the text color
+        color: "#333333",
         border: "1.5px solid black",
         maxHeight: "100vh",
       }}
@@ -87,7 +87,7 @@ const AppbarDesktop = () => {
         <Typography.Title
           level={3}
           style={{
-            color: "#0492C2", // Change the title color
+            color: "#0492C2",
             textTransform: "none",
             fontFamily: "monospace",
             margin: 0,
@@ -107,16 +107,6 @@ const AppbarDesktop = () => {
           border: "none",
           position: "relative",
         }}
-        onMouseEnter={(e) => {
-          const target = e.currentTarget;
-          const bar = target.querySelector(".hover-bar");
-          bar.style.opacity = "1";
-        }}
-        onMouseLeave={(e) => {
-          const target = e.currentTarget;
-          const bar = target.querySelector(".hover-bar");
-          bar.style.opacity = "0";
-        }}
       >
         <HomeOutlined style={{ fontSize: "20px", color: "#1890ff" }} />
         <Typography.Text
@@ -129,20 +119,6 @@ const AppbarDesktop = () => {
         >
           Home
         </Typography.Text>
-        <div
-          className="hover-bar"
-          style={{
-            position: "absolute",
-            bottom: "-3px",
-            left: "0",
-            right: "0",
-            width: "100%",
-            height: "3px",
-            backgroundColor: "#1890ff",
-            opacity: "0",
-            transition: "opacity 0.3s",
-          }}
-        ></div>
       </Button>
 
       <Button
@@ -154,16 +130,6 @@ const AppbarDesktop = () => {
           backgroundColor: "transparent",
           border: "none",
           position: "relative",
-        }}
-        onMouseEnter={(e) => {
-          const target = e.currentTarget;
-          const bar = target.querySelector(".hover-bar");
-          bar.style.opacity = "1";
-        }}
-        onMouseLeave={(e) => {
-          const target = e.currentTarget;
-          const bar = target.querySelector(".hover-bar");
-          bar.style.opacity = "0";
         }}
       >
         <ShoppingCartOutlined
@@ -178,20 +144,6 @@ const AppbarDesktop = () => {
         >
           Cart
         </Typography.Text>
-        <div
-          className="hover-bar"
-          style={{
-            position: "absolute",
-            bottom: "-3px",
-            left: "0",
-            right: "0",
-            width: "100%",
-            height: "3px",
-            backgroundColor: "#1890ff",
-            opacity: "0",
-            transition: "opacity 0.3s",
-          }}
-        ></div>
       </Button>
 
       <div style={{ flex: 1 }} />
@@ -235,16 +187,6 @@ const AppbarDesktop = () => {
               border: "none",
               position: "relative",
             }}
-            onMouseEnter={(e) => {
-              const target = e.currentTarget;
-              const bar = target.querySelector(".hover-bar");
-              bar.style.opacity = "1";
-            }}
-            onMouseLeave={(e) => {
-              const target = e.currentTarget;
-              const bar = target.querySelector(".hover-bar");
-              bar.style.opacity = "0";
-            }}
           >
             <SolutionOutlined
               style={{ color: "#1890ff", fontSize: "20px" }}
@@ -258,20 +200,6 @@ const AppbarDesktop = () => {
             >
               Register
             </Typography.Text>
-            <div
-              className="hover-bar"
-              style={{
-                position: "absolute",
-                bottom: "-3px",
-                left: "0",
-                right: "0",
-                width: "100%",
-                height: "3px",
-                backgroundColor: "#1890ff",
-                opacity: "0",
-                transition: "opacity 0.3s",
-              }}
-            ></div>
           </Button>
 
           <Button
@@ -284,16 +212,6 @@ const AppbarDesktop = () => {
               border: "none",
               position: "relative",
             }}
-            onMouseEnter={(e) => {
-              const target = e.currentTarget;
-              const bar = target.querySelector(".hover-bar");
-              bar.style.opacity = "1";
-            }}
-            onMouseLeave={(e) => {
-              const target = e.currentTarget;
-              const bar = target.querySelector(".hover-bar");
-              bar.style.opacity = "0";
-            }}
           >
             <UserOutlined style={{ fontSize: "20px", color: "#1890ff" }} />
             <Typography.Text
@@ -305,20 +223,6 @@ const AppbarDesktop = () => {
             >
               Login
             </Typography.Text>
-            <div
-              className="hover-bar"
-              style={{
-                position: "absolute",
-                bottom: "-3px",
-                left: "0",
-                right: "0",
-                width: "100%",
-                height: "3px",
-                backgroundColor: "#1890ff",
-                opacity: "0",
-                transition: "opacity 0.3s",
-              }}
-            ></div>
           </Button>
         </div>
       )}
