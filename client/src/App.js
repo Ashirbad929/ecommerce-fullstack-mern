@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-route
 import { useDispatch } from "react-redux";
 import { auth } from "./config-firebase/firebase";
 import { loggedInUser } from "./store/slices/usersSlice";
-import "./App.css";
+
 import Passwordadmin from "./pages/admin/password";
 import Appbar from "./components/Appbar/Appbar";
 import Login from "./components/auth/Login";

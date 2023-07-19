@@ -19,7 +19,7 @@ const AdminProductCard = ({ product, loading ,handleRemove}) => {
       actions={[<DeleteOutlined onClick={()=>handleRemove(slug)}/>,<Link to={`/admin/product/${slug}`}><EditOutlined/></Link>]}
     >
       
-        <Meta title={title} description={description}  />
+        <Meta title={title} description={`${description && description.substring(0,40)}...`}  />
       
     </Card>
     

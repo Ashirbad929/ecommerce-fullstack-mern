@@ -73,7 +73,7 @@ const Login = () => {
         position: 'relative',
       }}
     >
-      <Typography.Title level={2}>Shopify</Typography.Title>
+     
 
       <div
         style={{

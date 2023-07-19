@@ -8,7 +8,9 @@ const {
   listAll,
   remove,
   read,
-  update
+  update,
+  list,
+  productsCount
   
 } = require("../controllers/product.js"); //make sure to destructure to get the callback function
 router.post("/product", authCheck, adminCheck, create);
@@ -16,5 +18,10 @@ router.get("/products/:count", listAll);//show products this will be public
 router.delete('/product/:slug',authCheck,adminCheck,remove)
 router.get('/product/:slug',read)
 router.put('/product/:slug',authCheck,adminCheck,update)
+
+router.post('/products',list)
+router.post('/products/total',productsCount)
+
+
 
 module.exports = router;

@@ -46,7 +46,7 @@ const Register = () => {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2em' }}>
-      <Title level={2}>Shopify</Title>
+      
 
       <div style={{ width: '100%', maxWidth: '600px', padding: '2em', backgroundColor: '#FAFAD2', borderRadius: '8px', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)', minHeight: '400px' }}>
         <Title level={4} style={{ marginBottom: '2em', textAlign: 'center' }}>

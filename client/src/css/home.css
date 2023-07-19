@@ -1,0 +1,47 @@
+.home-container {
+    
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Display cards in a grid with a minimum width of 300px and automatically fit as many cards as possible in a row */
+    grid-gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the grid horizontally */
+    padding: 20px; /* Reduce padding to create smaller-sized cards */
+  }
+  
+  .writer-container {
+    text-align: center;
+    font-family: monospace;
+    font-size: 1.3rem;
+    color: rgb(90, 179, 179);
+    
+    margin: 0 25%;
+  }
+  .latest-products{
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0 20%;
+    
+    border-bottom: 1px solid black;
+   
+    margin-top: 1em;
+  }
+  
+  @media (max-width: 768px) {
+    .product-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr)); /* Display 2 cards in a grid column for smaller screens */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .product-list {
+      grid-template-columns: repeat(1, minmax(0, 1fr)); /* Display 1 card in a grid column for even smaller screens */
+    }
+  }
+  
+  /* Add any additional styles as needed */
+  

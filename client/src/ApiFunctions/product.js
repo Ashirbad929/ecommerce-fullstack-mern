@@ -21,11 +21,29 @@ export const removeProduct = async (slug, authtoken) => {
 export const getProduct = async (slug) => {
   return await axios.get(`${process.env.REACT_APP_API}/product/${slug}`);
 };
-export const updateProduct = async (slug,product,authtoken) => {
-  return await axios.put(`${process.env.REACT_APP_API}/product/${slug}`,product,{
-    headers:{
-      authtoken,
-
+export const updateProduct = async (slug, product, authtoken) => {
+  return await axios.put(
+    `${process.env.REACT_APP_API}/product/${slug}`,
+    product,
+    {
+      headers: {
+        authtoken,
+      },
     }
-  });
+  );
+};
+// for home pagination
+export const getProducts = async (sort, order, page) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}/products`,
+    { sort, order, page },
+    
+  );
+};
+export const getProductsCount = async (sort, order, limt) => {
+  return await axios.post(
+    `${process.env.REACT_APP_API}/products/total`,
+    { sort, order, limt },
+    
+  );
 };
