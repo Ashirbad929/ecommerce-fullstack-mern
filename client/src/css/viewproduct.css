@@ -1,0 +1,39 @@
+/* ViewProduct.css */
+@media (min-width: 577px) {
+  .view-product {
+    display: flex;
+    align-items: center;
+    max-width: 100vw;
+    flex-direction: row;
+    margin: 10px;
+  }
+
+  .product-images {
+    object-fit: cover;
+    width: 100%;
+    height:auto;
+    max-height: 90vh;
+    border-radius: 10px;
+    
+  }
+
+  .images-carousel {
+    max-width: 50%;
+    margin-right: 20px;
+  }
+
+  .card-details {
+    max-width: 50%;
+    
+    
+  
+   
+    
+  }
+  
+
+
+  
+
+
+}

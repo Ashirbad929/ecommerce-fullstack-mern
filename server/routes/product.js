@@ -14,13 +14,14 @@ const {
   
 } = require("../controllers/product.js"); //make sure to destructure to get the callback function
 router.post("/product", authCheck, adminCheck, create);
+router.post('/products/total',productsCount)
 router.get("/products/:count", listAll);//show products this will be public
 router.delete('/product/:slug',authCheck,adminCheck,remove)
 router.get('/product/:slug',read)
 router.put('/product/:slug',authCheck,adminCheck,update)
 
 router.post('/products',list)
-router.post('/products/total',productsCount)
+
 
 
 

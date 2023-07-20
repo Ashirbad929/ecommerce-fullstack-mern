@@ -66,10 +66,10 @@ const AppbarDesktop = () => {
         flexDirection: "row",
         gap: "2em",
         alignItems: "center",
-        backgroundColor: "#F0F2F5", // Change the background color to a slightly darker shade
+        backgroundColor: "black", // Change the background color to a slightly darker shade
         border: "none",
         padding: "1em",
-        color: "#333333", // Change the text color
+        color: "white", // Change the text color
         border: "1.5px solid black",
         maxHeight: "100vh",
       }}
@@ -121,7 +121,7 @@ const AppbarDesktop = () => {
         <HomeOutlined style={{ fontSize: "20px", color: "#1890ff" }} />
         <Typography.Text
           style={{
-            color: "#333333",
+            color: "white",
             textTransform: "none",
             fontFamily: "Rosemary",
             fontSize: "15px",
@@ -171,7 +171,7 @@ const AppbarDesktop = () => {
         />
         <Typography.Text
           style={{
-            color: "#333333",
+            color: "white",
             fontFamily: "Rosemary",
             textTransform: "none",
           }}
@@ -199,7 +199,7 @@ const AppbarDesktop = () => {
       {userId ? (
         <div style={{ color: "#333333", display: "flex", alignItems: "center" }}>
           <Typography.Text
-            style={{ color: "#333333", textTransform: "none" }}
+            style={{ color: "white", textTransform: "none" }}
           >
             {userId.email.split("@")[0]}
           </Typography.Text>
@@ -219,7 +219,7 @@ const AppbarDesktop = () => {
                 border: "none",
               }}
             >
-              <SettingOutlined style={{ color: "#333333" }} />
+              <SettingOutlined style={{ color: "whitesmoke" }} />
             </Button>
           </Dropdown>
         </div>
@@ -247,11 +247,11 @@ const AppbarDesktop = () => {
             }}
           >
             <SolutionOutlined
-              style={{ color: "#1890ff", fontSize: "20px" }}
+              style={{ color: "white", fontSize: "20px" }}
             />
             <Typography.Text
               style={{
-                color: "#333333",
+                color: "white",
                 fontFamily: "Rosemary",
                 textTransform: "none",
               }}

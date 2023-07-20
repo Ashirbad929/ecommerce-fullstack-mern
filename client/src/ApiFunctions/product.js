@@ -40,10 +40,10 @@ export const getProducts = async (sort, order, page) => {
     
   );
 };
-export const getProductsCount = async (sort, order, limt) => {
+export const getProductsCount = async () => {
   return await axios.post(
     `${process.env.REACT_APP_API}/products/total`,
-    { sort, order, limt },
+   
     
   );
 };

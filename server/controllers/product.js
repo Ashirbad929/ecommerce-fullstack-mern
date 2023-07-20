@@ -41,7 +41,7 @@ exports.read = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     if (req.body.title) {
-      req.body.slug=slugify(req.body.title)
+      req.body.slug = slugify(req.body.title);
     }
     const updated = await Product.findOneAndUpdate(
       { slug: req.params.slug },
@@ -62,51 +62,43 @@ exports.update = async (req, res) => {
 //     .populate('subs')
 //     .sort([[sort,order]])
 //     .limit(limit)
-    
+
 //     // return products
 //     res.json(products)
 //   } catch (error) {
 //     console.log(error)
-    
+
 //   }
 // }
 //with pagination
 exports.list = async (req, res) => {
   try {
-    const { page = 1, sort = "createdAt", order = "desc" } = req.query;
-    const perPage = 5; // Set the number of products per page here
-
-    console.log("Current Page:", page);
-    console.log("Sort:", sort);
-    console.log("Order:", order);
-
-    const products = await Product.find({})
-      .skip((parseInt(page) - 1) * perPage)
-      .populate('category')
-      .populate('subs')
-      .sort([[sort, order]])
-      .limit(perPage);
-
-    console.log("Number of products fetched:", products.length);
-    res.json(products);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-};
-
-
-
-exports.productsCount=async(req,res)=>{
-  try {
-    const estimate = await Product.estimatedDocumentCount();
-    res.json(estimate)
-    console.log('yes')
-    console.log('ccc',estimate)
-    
+    const { sort, order, page } = req.body;
+  const currentPage = page || 1; //if page is not there we use default 1
+  const perPage = 4;
+  const products = await Product.find({})
+  .skip((currentPage - 1) * page)
+  .populate("category")
+  .populate("subs")
+  .sort([[sort,order]])
+  .limit(perPage)
+  .exec();
+  res.json(products)
   } catch (error) {
     console.log(error)
     
   }
- 
-}
+
+
+};
+
+exports.productsCount = async (req, res) => {
+  try {
+    const estimate = await Product.estimatedDocumentCount();
+    res.json(estimate);
+    console.log("yes");
+    console.log("ccc", estimate);
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -11,24 +11,29 @@
     max-width: 1200px;
     margin: 0 auto; /* Center the grid horizontally */
     padding: 20px; /* Reduce padding to create smaller-sized cards */
+    margin-bottom: 1%;
   }
   
   .writer-container {
     text-align: center;
     font-family: monospace;
     font-size: 1.3rem;
-    color: rgb(90, 179, 179);
+    color: rgb(71, 95, 95);
     
     margin: 0 25%;
   }
   .latest-products{
+    font-family:'Times New Roman', Times, serif;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1.7em;
     margin: 0 20%;
-    
+   
     border-bottom: 1px solid black;
    
     margin-top: 1em;
+  }
+  .pagination-bar{
+    text-align: center;
   }
   
   @media (max-width: 768px) {

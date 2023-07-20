@@ -48,7 +48,8 @@ const FileUpload = ({ onFileUpload, setLoading, setValues, values }) => {
                   .then((res) => {
                     console.log("image upload response data", res);
                     allimages.push(res.data)
-                    setValues({ ...values, images: allimages });//this line 
+                    console.log('allimsges...',allimages)
+                    setValues({ ...values, images: allimages });//storing in a nested array
                   })
                   .catch((err) => {
                     console.log(err);

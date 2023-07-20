@@ -7,7 +7,7 @@ import '../../css/productcard.css';
 const { Meta } = Card;
 
 const ProductCard = ({ product, loading }) => {
-  const { title, description, images, slug } = product;
+  const { title, description, images, slug ,price} = product;
   const imageUrl = images && images.length ? images[0][0].url : '';
 
   return (
@@ -19,7 +19,9 @@ const ProductCard = ({ product, loading }) => {
       className="product-card"
     >
       {/* shorten the description using substring below */}
-      <Meta title={title} description={`${description && description.substring(0,40)}...`} /> 
+      <Meta title={title}  description={`${description && description.substring(0,40)}...`} /> 
+      {/* another meta tag for price */}
+      <Meta title={`price:$${price}`}   /> 
     </Card> 
   );
 }
