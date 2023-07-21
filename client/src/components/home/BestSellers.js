@@ -11,7 +11,7 @@ const BestSellers = () => {
   const [page,setPage]=useState(1);
   const loadAllProducts = () => {
     setLoading(true);
-    getProducts("createdAt", "desc",page).then((res) => {
+    getProducts("sold", "desc",page).then((res) => {
       setProducts(res.data);
       setLoading(false);
     });

@@ -1,5 +1,5 @@
 /* ViewProduct.css */
-@media (min-width: 577px) {
+@media (min-width: 600px) {
   .view-product {
     display: flex;
     align-items: center;

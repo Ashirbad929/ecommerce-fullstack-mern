@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import { Button, Input, Typography, Dropdown, Menu } from "antd";
 import { Link } from "react-router-dom";
 import {
@@ -24,7 +24,8 @@ const AppbarDesktop = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [menuVisible, setMenuVisible] = useState(false);
-
+  const [username,setUsername]=useState("dummy-user")
+ 
   const handleMenuClick = () => {
     setMenuVisible(!menuVisible);
   };

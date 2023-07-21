@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const User = require("../models/user");
 const slugify = require("slugify");
 exports.create = async (req, res) => {
   try {
@@ -74,22 +75,19 @@ exports.update = async (req, res) => {
 exports.list = async (req, res) => {
   try {
     const { sort, order, page } = req.body;
-  const currentPage = page || 1; //if page is not there we use default 1
-  const perPage = 4;
-  const products = await Product.find({})
-  .skip((currentPage - 1) * page)
-  .populate("category")
-  .populate("subs")
-  .sort([[sort,order]])
-  .limit(perPage)
-  .exec();
-  res.json(products)
+    const currentPage = page || 1; //if page is not there we use default 1
+    const perPage = 4;
+    const products = await Product.find({})
+      .skip((currentPage - 1) * page)
+      .populate("category")
+      .populate("subs")
+      .sort([[sort, order]])
+      .limit(perPage)
+      .exec();
+    res.json(products);
   } catch (error) {
-    console.log(error)
-    
+    console.log(error);
   }
-
-
 };
 
 exports.productsCount = async (req, res) => {
@@ -100,5 +98,40 @@ exports.productsCount = async (req, res) => {
     console.log("ccc", estimate);
   } catch (error) {
     console.log(error);
+  }
+};
+//star rating
+
+
+exports.productStar = async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ error: "Product not found." });
+    }
+
+    const user = await User.findOne({ email: req.user.email });
+    const { star } = req.body;
+
+    // Check if currently logged in user already rated
+    let existingRatingObject = product.ratings.find(
+      (ele) => ele.postedBy.toString() === user._id.toString()
+    );
+
+    if (!existingRatingObject) {
+      // If user hasn't left a rating yet, push it
+      product.ratings.push({ star: star, postedBy: user._id });
+    } else {
+      // If user already left a rating, update the star only
+      existingRatingObject.star = star;
+    }
+
+    const updatedProduct = await product.save();
+    res.json(updatedProduct);
+  } catch (error) {
+    console.error("Error in productStar controller:", error);
+    res.status(500).json({ error: "Something went wrong." });
   }
 };

@@ -44,7 +44,7 @@ const AppbarMobile = () => {
   };
 
   const menu = (
-    <Menu onClick={handleMenuClose}>
+    <Menu style={{backgroundColor:"white"}} onClick={handleMenuClose}>
       {userId && (
         <Menu.Item key="dashboard">
           <DashboardOutlined />
@@ -108,9 +108,9 @@ const AppbarMobile = () => {
         flexDirection: "row",
         gap: "2em",
         alignItems: "center",
-        backgroundColor: "#F0F2F5",
+        backgroundColor: "black",
         padding: "1em",
-        color: "#333333",
+        color: "white",
         border: "1.5px solid black",
         maxHeight: "100vh",
       }}
@@ -139,8 +139,8 @@ const AppbarMobile = () => {
       </Button>
 
       <div style={{ flex: 1 }} />
-    {userId && (<span style={{fontSize:"12px" ,marginRight:'0'}}>
-      {userId.name}
+    {userId && (<span style={{fontSize:"10px" }}>
+    {`${userId.email.split("@")[0].substring(0,10)}..`}
     </span>)}
 
       <Dropdown
@@ -148,18 +148,19 @@ const AppbarMobile = () => {
         trigger={["click"]}
         visible={menuVisible}
         onVisibleChange={handleMenuClick}
+       
       >
         <Button
           style={{
             display: "flex",
             gap: "0.5em",
             alignItems: "center",
-            color: "#333333",
-            backgroundColor: "transparent",
+            color: "white",
+            backgroundColor: "black",
             border: "none",
           }}
         >
-          <MenuOutlined style={{ color: "#333333" }} />
+          <MenuOutlined style={{ color: "white" }} />
         </Button>
       </Dropdown>
     </div>
