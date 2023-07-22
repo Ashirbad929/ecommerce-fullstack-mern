@@ -72,7 +72,7 @@ const SingleProduct = ({ product,onStarclick,star }) => {
            
            {product && product.ratings && product.ratings.length>0 ?showAverage(product):"(NO RATINGS YET)"}
           </div>
-          <Meta title={title} description={description} />
+          <Meta title={title} />
 
           <div className="additional-details">
             <p className="product-brand">Brand: {brand}</p>
@@ -80,15 +80,7 @@ const SingleProduct = ({ product,onStarclick,star }) => {
             <p className="product-price">Price: ${price}</p>
             <Tabs type="card">
               <TabPane tab="About" key="1">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-                suscipit possimus nisi nihil quibusdam dicta consequatur! Harum,
-                repellat! Voluptas sint modi in sapiente repudiandae eligendi.
-                Nemo numquam optio assumenda quasi! Hic quibusdam recusandae
-                inventore voluptatem qui atque maxime fuga! Sequi saepe earum
-                accusantium culpa delectus perspiciatis nisi laborum fuga cumque
-                praesentium tenetur earum, at quo quasi minus nesciunt aliquam
-                ipsa est explicabo! Magni, ipsum? Reiciendis nobis adipisci hic
-                ex iste quas.
+             {description}
               </TabPane>
               <TabPane tab="More" key="2">
                 Call us xxxx7xxx
@@ -97,6 +89,7 @@ const SingleProduct = ({ product,onStarclick,star }) => {
           </div>
         </Card>
       </div>
+     
     </div>
   );
 };

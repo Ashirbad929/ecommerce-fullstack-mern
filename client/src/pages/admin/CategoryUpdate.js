@@ -24,7 +24,7 @@ useEffect(()=>{
   loadcategory();
 },[])
  const loadcategory=()=>{
-  getCategory(slug).then((c)=>{setName(c.data.name)})
+  getCategory(slug).then((c)=>{setName(c.data.category.name)})
  }
   const [name, setName] = useState();
   const [loading, setLoading] = useState(false);

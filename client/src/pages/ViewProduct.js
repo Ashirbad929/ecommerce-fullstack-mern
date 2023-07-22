@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getProduct } from "../ApiFunctions/product";
+import { getProduct, productStar, getRelated } from "../ApiFunctions/product";
 import { useParams } from "react-router-dom";
 import SingleProduct from "../components/card/SingleProduct";
-import { productStar } from "../ApiFunctions/product";
 import "../css/viewproduct.css";
 import { useSelector } from "react-redux";
+import ProductCard from "../components/card/ProductCard";
 import { selectuser } from "../store/slices/usersSlice";
 
 const ViewProduct = () => {
@@ -12,6 +12,7 @@ const ViewProduct = () => {
   const user = useSelector(selectuser);
   const { slug } = useParams();
   const [star, setStar] = useState(0);
+  const [related, setRelated] = useState([]);
 
   useEffect(() => {
     loadSingleProduct();
@@ -19,14 +20,14 @@ const ViewProduct = () => {
 
   useEffect(() => {
     // Check if product.ratings exists before accessing it
-    if(user){
-      if (product.ratings && product.ratings.length   > 0) {
+    if (user) {
+      if (product.ratings && product.ratings.length > 0) {
         let existingRatingObject = product.ratings.find((ele) => {
           console.log("ele:", ele); // Log the element ...
           return ele.postedBy.toString() === user._id.toString(); // Check if postedBy matches user._id
         });
         console.log("existingRatingObject:", existingRatingObject);
-    
+
         if (existingRatingObject) {
           // If rating exists for the current user, set the star value
           setStar(existingRatingObject.star);
@@ -36,11 +37,17 @@ const ViewProduct = () => {
         }
       }
     }
- 
-  }, [product,user]);
-  
+  }, [product, user]);
 
-  const loadSingleProduct = () => getProduct(slug).then((res) => setProduct(res.data));
+  const loadSingleProduct = () => {
+    getProduct(slug).then((res) => {
+      setProduct(res.data);
+
+      getRelated(res.data._id).then((related) => {
+        setRelated(related.data);
+      });
+    });
+  };
 
   const onStarclick = (newRating, name) => {
     setStar(newRating);
@@ -52,12 +59,26 @@ const ViewProduct = () => {
   };
 
   return (
-    <>
+    <div className="view-product-container">
       <div className="view-product">
         <SingleProduct product={product} onStarclick={onStarclick} star={star} />
       </div>
-      related products
-    </>
+      <hr />
+      <div className="related-products">
+        <h2>Related Products</h2>
+        <div style={{ display: "flex", overflowX: "auto", gap: "1rem" ,marginLeft:"2rem" }}>
+          {related.length > 0 ? (
+            related.map((r) => (
+              <div key={r._id} style={{ display:"grid" ,}}>
+                <ProductCard product={r} />
+              </div>
+            ))
+          ) : (
+            "No items to show"
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

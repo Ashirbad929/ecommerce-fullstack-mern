@@ -21,7 +21,7 @@ const ProductCard = ({ product, loading }) => {
       className="product-card"
     >
       {/* shorten the description using substring below */}
-      <Meta title={title}  description={`${description && description.substring(0,40)}...`} /> 
+      <Meta title={title}  description={`${description && description.substring(0,35)}...`} /> 
       {/* another meta tag for price */}
       <Meta title={`price:$${price}`}   /> 
     </Card> 

@@ -135,3 +135,19 @@ exports.productStar = async (req, res) => {
     res.status(500).json({ error: "Something went wrong." });
   }
 };
+// related products
+exports.listRelated=async(req,res)=>{
+  const product=await Product.findById(req.params.productId).exec();
+  const related=await Product.find({
+    _id:{$ne:product._id}, // not including current product
+    category:product.category,
+
+
+  }).limit(3)
+  .populate('category')
+  .populate('subs')
+  
+  
+
+  res.json(related)
+}

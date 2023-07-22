@@ -5,6 +5,8 @@ import '../css/home.css';
 import Writer from '../components/Writer';
 import NewArrivals from '../components/home/NewArrivals';
 import BestSellers from '../components/home/BestSellers';
+import CategoryList from '../components/category/CategoryList';
+import SubList from '../components/sub/SubList';
 const Home = () => {
 
 
@@ -24,6 +26,12 @@ const Home = () => {
      <h1 className='latest-products'>Best sellers</h1>
       <BestSellers></BestSellers>
      </div>
+     <hr />
+     <CategoryList />
+     <hr />
+     <SubList/>
+     
+     
      
 
     </div>

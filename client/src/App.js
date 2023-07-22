@@ -31,6 +31,8 @@ import AllProducts from "./pages/product/Allproducts";
 import ProductUpdate from "./pages/product/ProductUpdate";
 import Home from "./pages/Home";
 import ViewProduct from "./pages/ViewProduct";
+import CategoryHome from "./components/category/CategoryHome";
+import SubHome from "./components/sub/SubHome";
 function App() {
   const user = useSelector(selectuser);
   const dispatch = useDispatch();
@@ -82,6 +84,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/category/:slug" element={<CategoryHome />} />
+          <Route path="/sub/:slug" element={<SubHome />} />
 
           <Route path="/product/:slug" element={<ViewProduct />} />
           {/* protected user routes */}

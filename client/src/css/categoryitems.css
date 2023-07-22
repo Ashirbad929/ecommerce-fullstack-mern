@@ -1,0 +1,17 @@
+/* categoryitems.css */
+.category-items {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+   
+  }
+  
+  .category-items-header {
+    margin-top: 0;
+    font-style: italic;
+    font-size: 24px;
+    padding: 10px; /* Add padding to create some space around the text */
+    background-color: #f0f0f0; /* Choose a background color for the header */
+    color: #333; /* Set the text color for better contrast */
+    border-radius: 4px; /* Add rounded corners to the background */
+  }
+  

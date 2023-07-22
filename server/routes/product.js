@@ -11,7 +11,8 @@ const {
   update,
   list,
   productsCount,
-  productStar
+  productStar,
+  listRelated
   
 } = require("../controllers/product.js"); //make sure to destructure to get the callback function
 router.post("/product", authCheck, adminCheck, create);
@@ -24,7 +25,8 @@ router.put('/product/:slug',authCheck,adminCheck,update)
 router.post('/products',list)
 // star  rating request
 router.put('/product/star/:productId',authCheck,productStar)  //authcheck cause only logged in user can give ratings
-
+//related products
+router.get('/product/related/:productId',listRelated)
 
 
 

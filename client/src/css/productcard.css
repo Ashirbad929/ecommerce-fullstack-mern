@@ -8,8 +8,8 @@
   .product-card img {
     height: 200px;
     object-fit: cover;
-    max-height: 100%; /* Ensure the image doesn't exceed the card height */
-    max-width: 100%; /* Ensure the image doesn't exceed the card width */
+    max-height: 200px; /* Ensure the image doesn't exceed the card height */
+    max-width: 400px; /* Ensure the image doesn't exceed the card width */
   }
   
   /* Add any additional styles as needed */

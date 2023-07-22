@@ -2,17 +2,20 @@
 @media (min-width: 600px) {
   .view-product {
     display: flex;
+    font-size: medium;
     align-items: center;
     max-width: 100vw;
     flex-direction: row;
     margin: 10px;
+    justify-content: space-around;
+  
   }
 
   .product-images {
     object-fit: cover;
     width: 100%;
     height:auto;
-    max-height: 90vh;
+    max-height: 70vh;
     border-radius: 10px;
     
   }
@@ -20,15 +23,37 @@
   .images-carousel {
     max-width: 50%;
     margin-right: 20px;
+    
   }
 
   .card-details {
-    max-width: 50%;
+    min-width: 40rem;
+    max-width: 40rem;
+    max-height:100%;
+
     
     
   
    
     
+  }
+ 
+  .related-products h2{
+    text-align: left;
+    
+    margin-left: 1em ;
+    font-weight: 100;
+    margin-top: 5px;
+    font-size:1.7rem;
+    font-family:fantasy;
+    background-color: transparent;
+    color:rgb(25, 23, 23);
+   
+    
+
+  }
+  .related-products{
+   
   }
   
 
