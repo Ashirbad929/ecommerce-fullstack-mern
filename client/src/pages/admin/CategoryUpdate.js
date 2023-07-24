@@ -17,7 +17,7 @@ import { message, Button, Input} from "antd";
 import { useNavigate } from "react-router-dom";
 
 const CategoryUpdate = () => {
-  const user = useSelector(selectuser);
+  const user = useSelector((state)=>state.user.userid);
     const navigate=useNavigate();
     const {slug}=useParams();
 useEffect(()=>{

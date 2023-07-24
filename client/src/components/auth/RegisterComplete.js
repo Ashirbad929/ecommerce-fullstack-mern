@@ -61,7 +61,7 @@ const RegisterComplete = () => {
         backgroundColor: 'whitesmoke',
       }}
     >
-   <Title level={2}>Shopify</Title>
+   <Title level={2}>Fetch</Title>
 
       <div
         style={{

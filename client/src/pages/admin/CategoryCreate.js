@@ -9,7 +9,7 @@ import { createCategory, getCategories, removeCategory } from "../../ApiFunction
 import AdminNav from "./AdminNav";
 
 const CategoryCreate = () => {
-  const user = useSelector(selectuser);
+  const user = useSelector((state)=>state.user.userid);
 
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);

@@ -10,7 +10,7 @@ const AllProducts = () => {
   
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const user=useSelector(selectuser)
+  const user=useSelector((state)=>state.user.userid)
   const loadAllProducts = () => {
     setLoading(true);
     getProductsByCount(13)

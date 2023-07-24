@@ -9,7 +9,7 @@ import { Avatar } from 'antd';
 const { Dragger } = Upload;
 
 const FileUpload = ({ onFileUpload, setLoading, setValues, values }) => {
-  const user = useSelector(selectuser);
+  const user = useSelector((state)=>state.user.userid);
   const allimages=[]
   const fileUploadAndResize = ({ fileList }) => {
     const files = fileList.map((file) => file.originFileObj);

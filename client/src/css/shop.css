@@ -1,0 +1,39 @@
+/* shop.css */
+.shop-container {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid beige;
+    
+  }
+  .search-filter {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    min-width: 20rem;
+    background-color: aliceblue;
+    min-height: 100vh;
+  }
+  .products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Display three cards in each row with equal width */
+    gap: 20px; /* Add a gap between the cards */
+    padding: 20px 7.3rem;
+    align-items: center;
+    /* overflow-y: scroll; */
+    overflow-x: auto;
+
+  }
+  .products-header{
+    margin-top: 0;
+    font-family: monospace;
+    font-size: 24px;
+    
+    padding: 10px; /* Add padding to create some space around the text */
+    background-color: #f0f0f0; /* Choose a background color for the header */
+    color: #333; /* Set the text color for better contrast */
+    border-radius: 4px; /* Add rounded corners to the background */
+    
+    
+
+
+  }

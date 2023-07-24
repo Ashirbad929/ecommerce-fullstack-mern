@@ -27,9 +27,12 @@ const Home = () => {
       <BestSellers></BestSellers>
      </div>
      <hr />
+     <div className='branded-products'>
      <CategoryList />
      <hr />
      <SubList/>
+     </div>
+     
      
      
      

@@ -9,8 +9,9 @@ import { selectuser } from "../store/slices/usersSlice";
 
 const ViewProduct = () => {
   const [product, setProduct] = useState({});
-  const user = useSelector(selectuser);
+  const user = useSelector((state)=>state.user.userid);
   const { slug } = useParams();
+  const [loading,setloading]=useState(false)
   const [star, setStar] = useState(0);
   const [related, setRelated] = useState([]);
 
@@ -40,8 +41,10 @@ const ViewProduct = () => {
   }, [product, user]);
 
   const loadSingleProduct = () => {
+    setloading(true)
     getProduct(slug).then((res) => {
       setProduct(res.data);
+      setloading(false)
 
       getRelated(res.data._id).then((related) => {
         setRelated(related.data);
@@ -70,7 +73,7 @@ const ViewProduct = () => {
           {related.length > 0 ? (
             related.map((r) => (
               <div key={r._id} style={{ display:"grid" ,}}>
-                <ProductCard product={r} />
+                <ProductCard loading={loading} product={r} />
               </div>
             ))
           ) : (

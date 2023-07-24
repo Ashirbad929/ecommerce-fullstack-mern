@@ -1,6 +1,7 @@
 import React, { useId, useState } from "react";
 import { Button, Input, Typography, Dropdown, Menu } from "antd";
 import { Link } from "react-router-dom";
+import Search from '../forms/Search'
 import {
   HomeOutlined,
   ShoppingCartOutlined,
@@ -12,7 +13,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import ecommlogo from "../../images/ecommlogo.jpg";
+
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { loggOutUser } from "../../store/slices/usersSlice";
@@ -20,7 +21,7 @@ import { selectuser } from "../../store/slices/usersSlice";
 import { auth } from "../../config-firebase/firebase";
 
 const AppbarDesktop = () => {
-  const userId = useSelector(selectuser);
+  const userId = useSelector((state)=>state.user.userid);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [menuVisible, setMenuVisible] = useState(false);
@@ -196,6 +197,9 @@ const AppbarDesktop = () => {
       </Button>
 
       <div style={{ flex: 1 }} />
+      <div>
+        <Search/>
+      </div>
 
       {userId ? (
         <div style={{ color: "#333333", display: "flex", alignItems: "center" }}>

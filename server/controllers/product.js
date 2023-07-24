@@ -151,3 +151,65 @@ exports.listRelated=async(req,res)=>{
 
   res.json(related)
 }
+// only one controller function to hanndle all search queries :)
+const handleQuery=async(req,res,query)=>{
+  const products=await Product.find({$text:{$search:query}})
+  .populate('category','_id name')
+  .populate('subs','_id name')
+  
+  .exec();
+  res.json(products)
+
+}
+//search with price 
+const  handlePrice=async(req,res,price)=>{
+  try {
+    let products=await Product.find({
+
+      price:{
+        $gte:price[0],  //greater than 
+        $lte:price[1]   //less than :)
+      }
+    })
+    .populate('category','_id name')
+    .populate('subs','_id name')
+    
+    .exec();
+    res.json(products)
+    
+    
+  } catch (error) {
+    console.log('error price search',error)
+    
+  }
+  
+
+}
+// search with category
+const handleCategory=async(req,res,category)=>{
+  const products=await Product.find({category})
+  .populate('category','_id name')
+  .populate('subs','_id name')
+  
+  .exec();
+  res.json(products)
+
+}
+exports.searchFilters=async(req,res)=>{
+  const {query,price,category}=req.body;
+  if(query){
+    console.log('query',query);
+    await handleQuery(req,res,query);
+
+  }
+  if(price!==undefined){
+    console.log('price---->',price)
+    await handlePrice(req,res,price);
+  }
+  if(category){
+    console.log('category',category)
+    await handleCategory(req,res,category)
+
+  }
+
+}

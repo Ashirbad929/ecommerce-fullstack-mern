@@ -11,7 +11,7 @@ import FileUpload from "../../components/forms/FileUpload";
 const { Option } = Select;
 
 const ProductCreate = () => {
-  const user = useSelector(selectuser); // Redux
+  const user = useSelector((state)=>state.user.userid); // Redux
   const [loading,setLoading]=useState(false)
   const loadCategories = () => {
     getCategories().then((c) => setValues({ ...values, categories: c.data }));

@@ -20,7 +20,7 @@ import { selectuser } from "../../store/slices/usersSlice";
 import { auth } from "../../config-firebase/firebase";
 
 const AppbarMobile = () => {
-  const userId = useSelector(selectuser);
+  const userId = useSelector((state)=>state.user.userid);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [menuVisible, setMenuVisible] = useState(false);

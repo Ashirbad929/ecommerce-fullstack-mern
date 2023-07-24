@@ -10,7 +10,7 @@ const RatingModal = ({ children }) => {
  const {slug}=useParams();
 
   const navigate = useNavigate();
-  const user = useSelector(selectuser);
+  const user = useSelector((state)=>state.user.userid);
   const [modalVisible, setModalVisible] = useState(false);
   const handleModal = () => {
     if (user && user.idtoken) {

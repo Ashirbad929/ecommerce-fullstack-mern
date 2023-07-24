@@ -12,7 +12,7 @@ import { getCategories } from "../../../ApiFunctions/category";
 const { Option } = Select;
 
 const SubCreate = () => {
-  const user = useSelector(selectuser);
+  const user = useSelector((state)=>state.user.userid);
 
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);

@@ -9,7 +9,7 @@ import {
 import { useDispatch } from "react-redux";
 import { auth } from "./config-firebase/firebase";
 import { loggedInUser } from "./store/slices/usersSlice";
-
+import Shop from "./pages/Shop";
 import Passwordadmin from "./pages/admin/password";
 import Appbar from "./components/Appbar/Appbar";
 import Login from "./components/auth/Login";
@@ -17,7 +17,7 @@ import Register from "./components/auth/Register";
 import RegisterComplete from "./components/auth/RegisterComplete";
 import { currentAdmin, currentUser } from "./ApiFunctions/auth";
 import ProductCreate from "./pages/product/ProductCreate";
-import { selectuser } from "./store/slices/usersSlice";
+
 import { useSelector } from "react-redux";
 import History from "./pages/user/History";
 import Password from "./pages/user/Password";
@@ -34,8 +34,9 @@ import ViewProduct from "./pages/ViewProduct";
 import CategoryHome from "./components/category/CategoryHome";
 import SubHome from "./components/sub/SubHome";
 function App() {
-  const user = useSelector(selectuser);
-  const dispatch = useDispatch();
+ 
+  const user = useSelector((state)=>state.user.userid);
+  
 
   const [ok, setOk] = useState(false);
   useEffect(() => {
@@ -50,6 +51,7 @@ function App() {
         });
     }
   });
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -75,6 +77,7 @@ function App() {
     return () => unsubscribe();
   }, []);
   console.log("App");
+  console.log("selectUser",user)
   return (
     <div>
       <BrowserRouter>
@@ -82,10 +85,11 @@ function App() {
         <Routes>
           {/* public routes */}
           <Route path="/register" element={<Register />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register/complete" element={<RegisterComplete />} />
           <Route path="/home" element={<Home />} />
           <Route path="/category/:slug" element={<CategoryHome />} />
           <Route path="/sub/:slug" element={<SubHome />} />
+          <Route path="/shop" element={<Shop />} />
 
           <Route path="/product/:slug" element={<ViewProduct />} />
           {/* protected user routes */}

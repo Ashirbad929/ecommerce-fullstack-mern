@@ -18,7 +18,7 @@ const { Option } = Select;
 
 const SubUpdate = () => {
   const navigate = useNavigate();
-  const user = useSelector(selectuser);
+  const user = useSelector((state)=>state.user.userid);
   const { slug } = useParams();
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);

@@ -7,11 +7,11 @@ import "../../css/viewproduct.css"; // Import the shared CSS file for styling
 import StarRating from "react-star-ratings";
 import { showAverage } from "../../ApiFunctions/rating";
 import RatingModal from "../modal-rating/RatingModal";
-
+import { FaRupeeSign } from 'react-icons/fa'
 const { Meta } = Card;
 const { TabPane } = Tabs;
 //children component
-const SingleProduct = ({ product,onStarclick,star }) => {
+const SingleProduct = ({ product,onStarclick,star,loading }) => {
   const { title, price, images, description, brand, color, _id } = product;
 
   if (!images || !Array.isArray(images) || images.length === 0) {
@@ -38,6 +38,7 @@ const SingleProduct = ({ product,onStarclick,star }) => {
       </div>
       <div className="card-details">
         <Card
+        loading={loading}
           actions={[
             <div>
               <HeartOutlined
@@ -77,7 +78,7 @@ const SingleProduct = ({ product,onStarclick,star }) => {
           <div className="additional-details">
             <p className="product-brand">Brand: {brand}</p>
             <p className="product-color">Color: {color}</p>
-            <p className="product-price">Price: ${price}</p>
+            <p style={{color:"#008080"}} className="product-price">Price: ₹{price}</p>
             <Tabs type="card">
               <TabPane tab="About" key="1">
              {description}

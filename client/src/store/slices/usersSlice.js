@@ -19,7 +19,8 @@ const usersSlice = createSlice({
 });
 
 export const { loggedInUser,loggOutUser } = usersSlice.actions;
-export const selectuser=(state)=>state.userid
-export default usersSlice.reducer;
+export const selectuser=(state)=>state.userid //selects userid can use this in multilple components more convienient less boiler plate code
+
+export default usersSlice.reducer;//yooooo yes
 
 
