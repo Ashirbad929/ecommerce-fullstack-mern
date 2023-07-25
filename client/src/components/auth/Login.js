@@ -19,9 +19,9 @@ const Login = () => {
 
   const roleBasedRedirect = (res) => {
     if (res.data.role === 'subscriber') {
-      navigate('/user/history');
+      navigate('/home');
     } else {
-      navigate('/admin/dashboard');
+      navigate('/home');
     }
   };
   const handleLogin = async () => {

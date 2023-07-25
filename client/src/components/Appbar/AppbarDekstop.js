@@ -1,12 +1,11 @@
-import React, { useId, useState } from "react";
-import { Button, Input, Typography, Dropdown, Menu } from "antd";
+import React, { useState } from "react";
+import { Button, Typography, Dropdown, Menu, Badge } from "antd";
 import { Link } from "react-router-dom";
-import Search from '../forms/Search'
+import Search from "../forms/Search";
 import {
   HomeOutlined,
   ShoppingCartOutlined,
   UserOutlined,
-  SearchOutlined,
   SolutionOutlined,
   SettingOutlined,
   DashboardOutlined,
@@ -21,12 +20,15 @@ import { selectuser } from "../../store/slices/usersSlice";
 import { auth } from "../../config-firebase/firebase";
 
 const AppbarDesktop = () => {
-  const userId = useSelector((state)=>state.user.userid);
+  const userId = useSelector((state) => state.user.userid);
+  const cart = useSelector((state) => state.cart);
+  const totalcartitems = cart.length;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [menuVisible, setMenuVisible] = useState(false);
-  const [username,setUsername]=useState("dummy-user")
- 
+  const [username, setUsername] = useState("dummy-user");
+
   const handleMenuClick = () => {
     setMenuVisible(!menuVisible);
   };
@@ -40,6 +42,7 @@ const AppbarDesktop = () => {
     dispatch(loggOutUser(null));
     navigate("/login");
   };
+
   const handleLinkClick = (path) => {
     navigate(path);
   };
@@ -171,15 +174,17 @@ const AppbarDesktop = () => {
         <ShoppingCartOutlined
           style={{ color: "#1890ff", fontSize: "20px" }}
         />
-        <Typography.Text
-          style={{
-            color: "white",
-            fontFamily: "Rosemary",
-            textTransform: "none",
-          }}
-        >
-          Cart
-        </Typography.Text>
+        <Badge count={totalcartitems} style={{ backgroundColor: "#1890ff", boxShadow: "0 0 0 1px #fff" }}>
+          <Typography.Text
+            style={{
+              color: "white",
+              fontFamily: "Rosemary",
+              textTransform: "none",
+            }}
+          >
+            Cart
+          </Typography.Text>
+        </Badge>
         <div
           className="hover-bar"
           style={{
@@ -198,7 +203,7 @@ const AppbarDesktop = () => {
 
       <div style={{ flex: 1 }} />
       <div>
-        <Search/>
+        <Search />
       </div>
 
       {userId ? (
@@ -300,7 +305,9 @@ const AppbarDesktop = () => {
               bar.style.opacity = "0";
             }}
           >
-            <UserOutlined style={{ fontSize: "20px", color: "#1890ff" }} />
+            <UserOutlined
+              style={{ fontSize: "20px", color: "#1890ff" }}
+            />
             <Typography.Text
               style={{
                 color: "#333333",
@@ -327,8 +334,6 @@ const AppbarDesktop = () => {
           </Button>
         </div>
       )}
-
-      
     </div>
   );
 };

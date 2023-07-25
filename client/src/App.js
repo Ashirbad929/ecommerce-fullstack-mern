@@ -17,7 +17,7 @@ import Register from "./components/auth/Register";
 import RegisterComplete from "./components/auth/RegisterComplete";
 import { currentAdmin, currentUser } from "./ApiFunctions/auth";
 import ProductCreate from "./pages/product/ProductCreate";
-
+import Cart from "./pages/Cart";
 import { useSelector } from "react-redux";
 import History from "./pages/user/History";
 import Password from "./pages/user/Password";
@@ -33,7 +33,10 @@ import Home from "./pages/Home";
 import ViewProduct from "./pages/ViewProduct";
 import CategoryHome from "./components/category/CategoryHome";
 import SubHome from "./components/sub/SubHome";
+import Siddedrawer from "./components/drawer/Siddedrawer";
+import Checkout from "./pages/Checkout";
 function App() {
+ 
  
   const user = useSelector((state)=>state.user.userid);
   
@@ -49,8 +52,10 @@ function App() {
         .catch((err) => {
           console.log("Admin route error", err);
         });
+        
     }
   });
+ 
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -82,6 +87,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Appbar />
+        <Siddedrawer/>
         <Routes>
           {/* public routes */}
           <Route path="/register" element={<Register />} />
@@ -90,6 +96,9 @@ function App() {
           <Route path="/category/:slug" element={<CategoryHome />} />
           <Route path="/sub/:slug" element={<SubHome />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
 
           <Route path="/product/:slug" element={<ViewProduct />} />
           {/* protected user routes */}

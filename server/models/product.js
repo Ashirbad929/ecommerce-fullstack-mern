@@ -40,7 +40,7 @@ const productSchema = new mongoose.Schema(
       ref: "Sub",
     }],
     
-    quantity: Number,
+    quantity: Number, //
     sold: {
       type: Number,
       default: 0,
@@ -58,7 +58,7 @@ const productSchema = new mongoose.Schema(
     },
     brand: {
       type: String,
-      enum: ["Apple", "Samsung", "Lenovo", "ASUS", "Microsoft","Boat"],
+      enum: ["Apple", "Samsung", "Lenovo", "ASUS", "Microsoft","Boat","Dell"],
     },
     ratings: [
       {

@@ -18,7 +18,7 @@ const userSchema=mongoose.Schema({
         default:[]
     },
     address:String,
-    // wishlist:[]
+    wishlist:[{type:ObjectId,ref:"Product"}]
 
 
 },{timestamps:true}

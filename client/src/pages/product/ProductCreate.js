@@ -32,7 +32,7 @@ const ProductCreate = () => {
     quantity: "",
     images: [],
     colors: ["Black", "Brown", "Silver", "White", "Blue"],
-    brands: ["Apple", "Samsung", "Microsoft", "ASUS", "Lenovo","Boat"],
+    brands: ["Apple", "Samsung", "Microsoft", "ASUS", "Lenovo","Boat","Dell"],
     color: "",
     brand: "",
   };

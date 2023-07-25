@@ -28,6 +28,27 @@ const Shop = () => {
             
         },300)
     }
+    const handleCheck=(e)=>{
+      console.log(e.target.value)
+      let prev=[...categoryIds]
+      let justchecked=e.target.value
+      console.log(e.target)
+      let foundInstate=prev.indexOf(justchecked) //use this value
+      //if found returns -1 else index
+      if(foundInstate===-1){
+
+        prev.push(justchecked)
+
+      }else{
+        prev.splice(foundInstate,1)
+      }
+      setCategoryIds(prev);
+      console.log(categoryIds)
+      fetchProducts({category:prev})
+
+
+
+    }
   const loadAllProducts = () => {
     getProductsByCount(12).then((p) => {
       setProducts(p.data);
@@ -54,12 +75,19 @@ const Shop = () => {
 
   // Delay the request to minimize requests while the user is typing
   useEffect(() => {
-    const delayed = setTimeout(() => {
+    if(text==""){
+      return;
+    }
+    const delayed =()=> setTimeout(() => {
       fetchProducts({ query: text });
     }, 50);
+    delayed()
     // Cleanup the timeout on component unmount
   }, [text]);
   useEffect(()=>{
+    if(price==0){
+      return;
+    }
     fetchProducts({price})
 
   },[ok])
@@ -67,7 +95,7 @@ const Shop = () => {
 const showCategories = () =>
   categories.map((c) => (
     <div key={c._id}>
-      <Checkbox id={c._id} name="category">{c.name}</Checkbox>
+      <Checkbox onChange={handleCheck} id={c._id} value={c._id} name="category">{c.name}</Checkbox>
       <br />
     </div>
   ));
