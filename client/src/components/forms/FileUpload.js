@@ -3,7 +3,7 @@ import { Upload } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import Resizer from "react-image-file-resizer";
 import axios, { all } from "axios";
-import { selectuser } from "../../store/slices/usersSlice";
+
 import { useSelector } from "react-redux";
 import { Avatar } from 'antd';
 const { Dragger } = Upload;

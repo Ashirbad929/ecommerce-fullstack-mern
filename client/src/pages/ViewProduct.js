@@ -48,6 +48,8 @@ const ViewProduct = () => {
 
       getRelated(res.data._id).then((related) => {
         setRelated(related.data);
+      }).catch((err)=>{
+        console.log(console.error)
       });
     });
   };
