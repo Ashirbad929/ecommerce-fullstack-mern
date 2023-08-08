@@ -16,7 +16,9 @@ exports.userCart = async (req, res) => {
     cartExistByThisUser.remove();
     console.log("removed old cart");
   }
-
+if(!cart){
+  return res.json("cart is empty")
+}
   for (let i = 0; i < cart.length; i++) {
     let object = {};
     object.product = cart[i]._id;

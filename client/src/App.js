@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,lazy,Suspense } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -6,35 +6,36 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
-import { useDispatch } from "react-redux";
+
+import { useDispatch } from "react-redux"; 
+import { useSelector } from "react-redux";
 import { auth } from "./config-firebase/firebase";
 import { loggedInUser } from "./store/slices/usersSlice";
-import Shop from "./pages/Shop";
-import Passwordadmin from "./pages/admin/password";
-import Appbar from "./components/Appbar/Appbar";
-import Login from "./components/auth/Login";
-import Register from "./components/auth/Register";
-import RegisterComplete from "./components/auth/RegisterComplete";
 import { currentAdmin, currentUser } from "./ApiFunctions/auth";
-import ProductCreate from "./pages/product/ProductCreate";
-import Cart from "./pages/Cart";
-import { useSelector } from "react-redux";
-import History from "./pages/user/History";
-import Password from "./pages/user/Password";
-import Wishlist from "./pages/user/Wishlist";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import CategoryCreate from "./pages/admin/CategoryCreate";
-import CategoryUpdate from "./pages/admin/CategoryUpdate";
-import SubCreate from "./pages/admin/sub/SubCreate";
-import SubUpdate from "./pages/admin/sub/SubUpdate";
-import AllProducts from "./pages/product/Allproducts";
-import ProductUpdate from "./pages/product/ProductUpdate";
-import Home from "./pages/Home";
-import ViewProduct from "./pages/ViewProduct";
-import CategoryHome from "./components/category/CategoryHome";
-import SubHome from "./components/sub/SubHome";
-import Siddedrawer from "./components/drawer/Siddedrawer";
-import Checkout from "./pages/Checkout";
+const Shop = lazy(() => import("./pages/Shop"));
+const Passwordadmin = lazy(() => import("./pages/admin/password"));
+const Appbar = lazy(() => import("./components/Appbar/Appbar"));
+const Login = lazy(() => import("./components/auth/Login"));
+const Register = lazy(() => import("./components/auth/Register"));
+const RegisterComplete = lazy(() => import("./components/auth/RegisterComplete"));
+const ProductCreate = lazy(() => import("./pages/product/ProductCreate"));
+const Cart = lazy(() => import("./pages/Cart"));
+const History = lazy(() => import("./pages/user/History"));
+const Password = lazy(() => import("./pages/user/Password"));
+const Wishlist = lazy(() => import("./pages/user/Wishlist"));
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const CategoryCreate = lazy(() => import("./pages/admin/CategoryCreate"));
+const CategoryUpdate = lazy(() => import("./pages/admin/CategoryUpdate"));
+const SubCreate = lazy(() => import("./pages/admin/sub/SubCreate"));
+const SubUpdate = lazy(() => import("./pages/admin/sub/SubUpdate"));
+const AllProducts = lazy(() => import("./pages/product/Allproducts"));
+const ProductUpdate = lazy(() => import("./pages/product/ProductUpdate"));
+const Home = lazy(() => import("./pages/Home"));
+const ViewProduct = lazy(() => import("./pages/ViewProduct"));
+const CategoryHome = lazy(() => import("./components/category/CategoryHome"));
+const SubHome = lazy(() => import("./components/sub/SubHome"));
+const Siddedrawer = lazy(() => import("./components/drawer/Siddedrawer"));
+const Checkout = lazy(() => import("./pages/Checkout"));
 function App() {
  
  
@@ -84,7 +85,8 @@ function App() {
   console.log("App");
   console.log("selectUser",user)
   return (
-    <div>
+    <Suspense fallback={<p>loading...</p>}>
+      <div>
       <BrowserRouter>
         <Appbar />
         <Siddedrawer/>
@@ -158,6 +160,8 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+    </Suspense>
+    
   );
 }
 

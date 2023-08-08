@@ -15,6 +15,8 @@ const Checkout = () => {
           console.log("user cart response", JSON.stringify(res.data, null, 4));
           setProducts(res.data.products);
           setTotal(res.data.cartTotal);
+          console.log("get uesr"+res.data.products)
+          console.log("get user total"+res.data.cartTotal)
         })
         .catch((error) => {
           console.error("Error fetching user cart:", error.message);

@@ -10,7 +10,7 @@ export const userCart = async (cart, authtoken) => {
     }
   );
 };
-export const getuserCart = async ( authtoken) => {
+export const getuserCart = async (authtoken) => {
   return await axios.get(
     `${process.env.REACT_APP_API}/user/cart`,
 
