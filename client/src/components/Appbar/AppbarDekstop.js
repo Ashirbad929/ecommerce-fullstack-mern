@@ -310,7 +310,7 @@ const AppbarDesktop = () => {
             />
             <Typography.Text
               style={{
-                color: "#333333",
+                color: "white",
                 fontFamily: "Rosemary",
                 textTransform: "none",
               }}
