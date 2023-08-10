@@ -35,6 +35,8 @@ export const updateProduct = async (slug, product, authtoken) => {
 // for home pagination
 // export const getProducts = async (sort, order, page) => {
 //   return await axios.post(
+
+
 //     `${process.env.REACT_APP_API}/products`,
 //     { sort, order, page },
     

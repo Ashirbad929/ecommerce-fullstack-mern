@@ -8,6 +8,7 @@ const MyFooter = () => {
       <div className="footer-content">
         <p>About</p>
         <p>
+          this is for learning purpose
           A full-stack e-commerce website built with MERN stack and Ant Design UI.
           Features include advanced search, payments with Stripe, wishlist/cart management,
           invoice PDFs, and Firebase authentication.

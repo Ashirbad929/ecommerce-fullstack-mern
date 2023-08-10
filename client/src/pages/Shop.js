@@ -75,9 +75,7 @@ const Shop = () => {
 
   // Delay the request to minimize requests while the user is typing
   useEffect(() => {
-    if(text==""){
-      return;
-    }
+    
     const delayed =()=> setTimeout(() => {
       fetchProducts({ query: text });
     }, 50);
